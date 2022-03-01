@@ -33,67 +33,43 @@ $(document).ready(function() {
 
     }
   });
-  
+
   $('#number').change(function(){
-    var existing_id = '';
     var number = $(this).val();
+
     $('#show').html('');
-    // $('#show').append(html);
+
+    var html = [];
+    for (var i = 1; i <= number; i++) {
+      html += '<div class="row">'+
+      '<div class="form-group col-md-6">'+
+      '<label>Product-'+i+'</label>'+
+      '<select class="form-control inventory">'+
+      '</select>'+
+      '</div>'+
+      '<div class="form-group col-md-6">'+
+      '<label>Quantity</label>'+
+      '<input type="text" class="form-control" placeholder="Quantity">'+
+      '</div>'+
+      '</div>';
+    }
+    $('#show').append(html);
+
     $.ajax({
       url: 'db-stock.php',
       success: function(data){
-        var data = JSON.parse(data);
-        var something = ``;
-        something +=`<div class="row">
-        <div class="form-group col-md-6">
-        <label>Product-1</label>
-        <select class="form-control inventory">`;
-        $.each(data, function(index, value){
-          something += `<option value=${value.id}>${value.product_name}</option>`;
-        })
-        something += `</select>
-        </div>
-        </div>`;
-        callback(something);
+        var array = JSON.parse(data);
+
+        $('.inventory').html('');
+
+        var html = [];
+        $.each(array, function(index, val) {
+          html += '<option value="'+val.id+'">'+val.product_name+' ('+val.category+')</option>';
+        });
+
+        var opt = $('.inventory').append(html);
       }
-
-      // success: function(data){
-      //   var array = JSON.parse(data);
-      //   var prev_selected = array[0].id;
-      //   $('.inventory').html('');
-
-      //   var html = [];
-      //   // console.log(array);
-      //   // console.log("Filter",$('.inventory').length);
-      //   $('.inventory').each(function(index){
-
-      //     var element = $(this);
-
-      //     $.each(array, function(index, val) {
-      //       if(prev_selected != '' && prev_selected != val.id){
-      //         html += '<option value="'+val.id+'">'+val.product_name+' ('+val.category+')</option>';
-      //       }
-      //       else{
-      //         html += '<option value="'+val.id+'" selected>'+val.product_name+' ('+val.category+')</option>';
-      //       }
-
-      //     });
-      //     prev_selected = element.find(':selected').val();
-      //     console.log(prev_selected);
-      //     console.log('if running');
-      //     var opt = $('.inventory').append(html);
-      //   })
-      // }
     });
-    function calc(something) {
-      alert(something);
-    }
-    var some =calc();
-    console.log(some);
-    for (var i = 1; i <= number; i++) {
-      console.log(html);
-      var opt = $('#show').append(html);
-    }
   });
 });
 
