@@ -11,7 +11,7 @@ $data = select('inventory');
 	<a href="add-inventory.php" class="btn btn-primary">Add Inventory</a>
 </div>
 <div class="card-body">
-	<table class="table table-striped">
+	<!-- <table class="table table-striped">
 		<thead>
 			<tr>
 				<th>#</th>
@@ -48,7 +48,44 @@ $data = select('inventory');
 				</tr>
 			<?php endforeach ?>
 		</tbody>
-	</table>
+	</table> -->
+	<div class="details-container">
+		<ul class="responsive-table">
+			<li class="table-header">
+				<div class="col col-1" data-label="#">#</div>
+				<div class="col">Name</div>
+				<div class="col">Category</div>
+				<div class="col">Total Qty</div>
+				<div class="col">Qty after Shortage</div>
+				<div class="col">Shortage</div>
+				<div class="col">Total paid Amount</div>
+				<div class="col">Amount/kg</div>
+				<div class="col">Quality</div>
+				<div class="col" colspan="2">Action</div>
+			</li>
+			<?php $n =1;?>
+			<?php foreach ($data as $key => $value): ?>
+				<li class="table-row">
+					<div class="col col-1" data-label="#"><?= $n++ ?></div>
+					<div class="col" data-label="Name-"><?= $value['product_name'] ?></div>
+					<div class="col" data-label="Category-"><?= $value['category'] ?></div>
+					<div class="col" data-label="Total Qty-"><?= $value['product_qty'] ?></div>
+					<div class="col" data-label="Qty after Shortage-"><?= $value['total_qty'] ?></div>
+					<div class="col" data-label="Shortage-"><?= $value['shortage'] ?></div>
+					<div class="col" data-label="Total Amount Paid-"><?= $value['total_amount_paid'] ?></div>
+					<div class="col" data-label="Amount/kg-"><?= $value['amount_per_kg'] ?></div>
+					<div class="col" data-label="Quality-"><?= $value['quality'] ?></div>
+					<div class="btn-group" role="group">
+						<a href="edit.php?id=<?php echo $value['id']?>" class="btn btn-sm btn-primary">Edit</a>
+						<button type="button" class="btn btn-sm btn-secondary" data-toggle="modal" data-target="#delete_stock-<?= $value['id'] ?>">
+							Delete
+						</button>
+					</div>
+				</li>
+			<?php endforeach ?>
+
+		</ul>
+	</div>
 </div>
 
 <?php 

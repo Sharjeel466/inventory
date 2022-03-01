@@ -281,14 +281,14 @@ section {
 
 @media (max-width: 991px) {
     .page-wrapper {
-    overflow: auto;
-    background: #e5e5e5;
-    padding-bottom: 12vh;
-}
+        overflow: auto;
+        background: #e5e5e5;
+        padding-bottom: 12vh;
+    }
 }
 .page-container {
     background: #e5e5e5;
-    padding-left: 300px;
+    /*padding-left: 300px;*/
 }
 
 @media (max-width: 991px) {
@@ -323,7 +323,7 @@ section {
 @media (max-width: 991px) {
     .main-content {
         padding-top: 50px;
-	padding-bottom: 100px;
+        padding-bottom: 100px;
     }
 }
 
@@ -977,7 +977,7 @@ section {
 .select2-container--default.select2-container--open.select2-container--below .select2-selection--multiple {
     border-bottom-left-radius: 3px;
     border-bottom-right-radius: 3px;
- }
+}
 
 .rs-select2--border .select2-container--default .select2-selection--single,
 
@@ -1577,12 +1577,13 @@ section {
 }
 
 .menu-sidebar {
+    z-index: 999;
     width: 300px;
     position: fixed;
     left: 0;
     top: 0;
     bottom: 0;
-    background: #fff;
+    /*background: #fff;*/
     overflow-y: auto;
 }
 
@@ -1625,8 +1626,8 @@ section {
 }
 
 .navbar-sidebar {
-    padding: 35px;
-    padding-bottom: 0;
+    /*padding: 35px;*/
+    /*padding-bottom: 0;*/
 }
 
 .navbar-sidebar .navbar__list li a {
@@ -5313,7 +5314,7 @@ section {
 }
 
 .switch.switch-text .switch-label::before,
-  .switch.switch-text .switch-label::after {
+.switch.switch-text .switch-label::after {
     position: absolute;
     top: 50%;
     width: 50%;
@@ -5459,7 +5460,7 @@ section {
 }
 
 .switch.switch-icon .switch-label::before,
-  .switch.switch-icon .switch-label::after {
+.switch.switch-icon .switch-label::after {
     position: absolute;
     top: 50%;
     width: 50%;
@@ -14648,4 +14649,150 @@ section {
 
 .vue-lists ul, .vue-lists ol {
     padding-left: 30px;
+}
+
+.details-container {
+    /*width: 90%;*/
+    /*max-width: 1000px;*/
+    margin-top: 20px;
+    /*margin-left: auto;*/
+    /*margin-right: auto;*/
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.responsive-table li {
+    border-radius: 3px;
+    padding: 8px 10px;
+    display: flex;
+    justify-content: space-between;
+}
+.responsive-table .table-header {
+    background-color: transparent;
+    font-size: 15px;
+    text-transform: uppercase;
+    color: white;
+    letter-spacing: 0.03em;
+}
+.responsive-table .table-row {
+}
+.responsive-table .col{
+    text-transform: uppercase;
+}
+.responsive-table .table-header .col{
+    background: transparent;
+    padding: 5px;
+}
+.responsive-table .table-row .col{
+    padding: 15px;
+    background: white;
+    margin: 0px 1px;
+    border-radius: 5px;
+    font-size: 15px;
+    color: #9b9b9b;
+    font-weight: 600;
+    align-items: center;
+}
+.responsive-table .table-row .col-1{
+    background: #1b427b;
+    text-align: center;
+    color: white;
+    font-size: 15px;
+} 
+.responsive-table .col-1 {
+    flex-basis: 15%;
+}
+.responsive-table .col-2 {
+    flex-basis: 25%;
+}
+.responsive-table .col-3 {
+    flex-basis: 25%;
+}
+.responsive-table .col-4 {
+    flex-basis: 40%;
+}
+.responsive-table .col-5 {
+    flex-basis: 15%;
+}
+
+@media all and (max-width: 767px) {
+    .responsive-table .table-header {
+        display: none;
+    }
+    .responsive-table li,
+    .search-row {
+        display: block;
+    }
+
+.responsive-table .table-row .col {
+        flex-basis: 100%;
+        margin: 4px 0px;
+        text-align: left;
+    }
+
+    .responsive-table .col,
+    .search-grid-element
+    {
+        flex-basis: 100%;
+        margin: 4px 0px;
+    }
+    .search-grid-element
+    {
+        margin: 10px 0px;
+    }
+    .responsive-table .col {
+        display: flex;
+        padding: 10px 0;
+        text-align: right;
+    }
+    .responsive-table .table-row .col {
+        flex-basis: 100%;
+        margin: 4px 0px;
+        text-align: left;
+    }
+    .responsive-table .col:before {
+        color: #6C7A89;
+        padding-right: 10px;
+        content: attr(data-label);
+        flex-basis: 30%;
+        text-align: left;
+    }
+}
+
+.responsive-table .table-header .col{
+    background: #e9e8e8;
+    padding: 5px;
+    border-radius: 6px;
+}
+
+.responsive-table .table-header {
+    background-color: transparent;
+    font-size: 15px;
+    text-transform: uppercase;
+    color: black;
+    letter-spacing: 0.03em;
+}
+
+.responsive-table .table-row .col{
+    padding: 15px;
+    background: #e5e5e5;
+    margin: 0px 1px;
+    border-radius: 5px;
+    font-size: 15px;
+    color: #9b9b9b;
+    font-weight: 600;
+    align-items: center;
+}
+.responsive-table .table-row .col-1{
+    background: #164e8b;
+    text-align: center;
+    color: white;
+    font-size: 15px;
+} 
+
+.list-unstyled li a{
+        margin-right: 10px;
+    background-color: #e1e1e1;
+    padding: 11px;
+    border-radius: 21px;
 }
