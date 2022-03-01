@@ -1,0 +1,57 @@
+*{
+	font-family: 'Poppins', sans-serif;
+}	
+
+.wrapper{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	min-height: 100vh;
+}
+
+.wrapper-child{
+	padding: 26px;
+	width: 100%;
+	max-width: 377px;
+	background-color: #fff;
+	border-radius: 16px;
+	box-shadow: 0 0 128px 0 rgb(0 0 0 / 10%), 0 32px 64px -48px rgb(0 0 0 / 50%);
+}
+
+input{
+	margin-bottom: 15px !important;
+}
+
+.register{
+	font-weight: bold !important;
+}
+
+#password-icon{
+	margin-left: -30px; 
+	cursor: pointer;
+}
+
+i{
+	position: relative;
+	right: -297px;
+	top: -37px;
+	cursor: pointer !important;
+	transform: translateY(-50%);
+}
+
+.btn-secondary{
+	background-color: #333 !important;
+}
+
+nav .collapse h4{
+	color: white;
+}
+
+a{
+	color: white !important;
+	text-decoration: none;
+}
+
+a:hover{
+	color: #e3d4d4 !important;
+}
