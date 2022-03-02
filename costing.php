@@ -29,7 +29,7 @@ require_once('functions.php');
 					<?php 
 					$count = 1;
 					foreach($costing_data as $key => $val){
-						?><option value="<?php echo $val['id'] ?>"><?php echo $count ?></option><?php
+						?><option value="<?php echo $count ?>"><?php echo $count ?></option><?php
 					$count++;
 					}
 					

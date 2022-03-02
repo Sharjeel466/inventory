@@ -19,21 +19,6 @@ $(document).on('change paste keyup', function() {
 
 $(document).ready(function() {
 
-  // $.ajax({
-  //   url: 'db-stock.php',
-  //   success: function(data){
-  //     var arr = JSON.parse(data);
-
-  //     var l = arr.length;
-  //     var option = '';
-  //     for (var i = 1; i < l+1; i++) {
-  //       option += '<option value="'+i+'">'+i+'</option>';
-  //     }
-  //     $('#number').append(option);
-
-  //   }
-  // });
-
   $('#mat-number').change(function(){
     var mat_number = $(this).val();
 
@@ -41,64 +26,52 @@ $(document).ready(function() {
       url: 'db-stock.php',
       data: {mat_number:mat_number},
       success: function(response){
+
         $('#products-show-wrapper').html(response);
         $(document).on('change', '.inventory', function(){
           var selected = $(this).val();
+          var qty = $(this).find('option:selected').attr('qty');
           var data_id = $(this).data('id');
+          var qty_length = $('.product_qty-'+data_id).attr('maxlength', qty.length);
+          
+          $('.product_qty-'+data_id).val(qty);
 
-          console.log(data_id); 
           $('.inventory').each(function(index){
             if($(this).data('id') != data_id){
               $(this).find('option[value='+selected+']').remove();
             }
-          })  
+          });
+
+          $(document).on('change keyup keypress', '.product_qty-'+data_id, function() {
+
+            var val = $(this).val();
+
+            // if ($(this).val() == '') {
+            //   // return $(this).val(qty);
+            // }
+
+            console.log(val.length)
+            console.log(qty_length)
+
+            if (val.length > qty_length) {
+              alert('Maximum limit reached!!!')
+              return $(this).val(qty);
+            }
+            
+            // if($(this).val('') < 1 || $(this).val() < 1){
+            //   // alert('Minimum limit reached!!!')
+            //   // return true;
+            //   // $(this).val(qty);
+            // }
+          });
+
         })
         
       }
     });
 
-
-
-
-
-    // $('#show').html('');
-
-    // var html = [];
-    // for (var i = 1; i <= number; i++) {
-    //   html += '<div class="row">'+
-    //   '<div class="form-group col-md-6">'+
-    //   '<label>Product-'+i+'</label>'+
-    //   '<select class="form-control inventory">'+
-    //   '</select>'+
-    //   '</div>'+
-    //   '<div class="form-group col-md-6">'+
-    //   '<label>Quantity</label>'+
-    //   '<input type="text" class="form-control" placeholder="Quantity">'+
-    //   '</div>'+
-    //   '</div>';
-    // }
-    // $('#show').append(html);
-
-    // $.ajax({
-    //   url: 'db-stock.php',
-    //   data: {number:number},
-    //   success: function(response){
-        // var array = JSON.parse(data);
-
-       //  $('.inventory').html('');
-       //         var html = [];
-       //  // html += '<option value="" selected="selected">Select Product</option>';
-       //  $.each(array, function(index, val) {
-       //    html += '<option value="'+val.id+'">'+val.product_name+' ('+val.category+')</option>';
-       //  });
-       //  var selected_option = $('select.inventory').val();
-       // console.log(selected_option);
-
-       //  var opt = $('.inventory').append(html);
-    //   }
-    // });
-
   });
+
 });
 
 var specialKeys = new Array();
