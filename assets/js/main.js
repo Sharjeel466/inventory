@@ -33,8 +33,11 @@ $(document).ready(function() {
           var qty = $(this).find('option:selected').attr('qty');
           var data_id = $(this).data('id');
           var qty_length = $('.product_qty-'+data_id).attr('maxlength', qty.length);
-          
+          var t_price = $(this).find('option:selected').attr('price');
+
+          $('.prod_id-'+data_id).text(qty);
           $('.product_qty-'+data_id).val(qty);
+          
 
           $('.inventory').each(function(index){
             if($(this).data('id') != data_id){
@@ -42,36 +45,49 @@ $(document).ready(function() {
             }
           });
 
-          $(document).on('change keyup keypress', '.product_qty-'+data_id, function() {
+          $(document).on('keyup', '.product_qty-'+data_id, function() {
+            var prod_qty = $(this).val();
+            var x = t_price * prod_qty;
+            $('#hidden-product_qty-'+data_id).val(x.toFixed(2));
 
-            var val = $(this).val();
+            var t = 0;
+            $('.hidden_data').each( function() {
+              t += parseFloat($(this).val());
+            });
+            $('#total').val(t.toFixed(2));
 
-            // if ($(this).val() == '') {
-            //   // return $(this).val(qty);
-            // }
+            var q = 0;
+            $('.t_qty').each( function() {
+              q += parseFloat($(this).val());
+            });
+            $('#total-qty').val(q.toFixed(2));
 
-            console.log(val.length)
-            console.log(qty_length)
+            var total_quantity = $('#total-qty').val();
 
-            if (val.length > qty_length) {
-              alert('Maximum limit reached!!!')
-              return $(this).val(qty);
-            }
-            
-            // if($(this).val('') < 1 || $(this).val() < 1){
-            //   // alert('Minimum limit reached!!!')
-            //   // return true;
-            //   // $(this).val(qty);
-            // }
+            $(document).on('keyup', '#required-qty', function() {
+              var required_qty = $(this).val();
+
+              var total_divide = required_qty/total_quantity;
+              var require_divided = total_divide.toFixed(2);
+
+              var a = [];
+              y = 0;
+              $('.t_qty').each( function() {
+                a[y++] = parseFloat($(this).val());
+              });
+              console.log(a)
+
+              // $.each(a, function(index, val) {
+              // var required_mul = val*require_divided;
+              // console.log(required_mul)
+              // });
+
+            });
           });
-
-        })
-        
+        })   
       }
     });
-
   });
-
 });
 
 var specialKeys = new Array();

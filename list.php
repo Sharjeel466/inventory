@@ -23,9 +23,8 @@ $data = select('inventory');
 			<div class="container-fluid">
 				<ul class="navbar-mobile__list list-unstyled">
 					<li>
-						<a href="#">
-							<i class="fas fa-chart-bar"></i>Charts
-						</a>
+						<a href="index.php"><h4>Inventory</h4></a>
+						<a href="costing.php"><h4>Costing</h4></a>
 					</li>
 				</ul>
 			</div>
@@ -53,37 +52,38 @@ $data = select('inventory');
 					</li>
 				</ul>
 			</nav> -->
-		<!-- </div> -->
-	</aside>
-	<!-- END MENU SIDEBAR-->
+			<!-- </div> -->
+		</aside>
+		<!-- END MENU SIDEBAR-->
 
-	<!-- PAGE CONTAINER-->
-	<div class="page-container">
-		<!-- HEADER DESKTOP-->
-		<header class="header-desktop">
-			<div class="section__content section__content--p30">
-				<div class="container-fluid">
-					<div class="header-wrap">
-						<nav class="navbar-sidebar">
-							<ul class="list-unstyled navbar">
-								<li>
-									<a href="index.php"><h4>Inventory</h4></a>
-									<a href="costing.php"><h4>Costing</h4></a>
-								</li>
-							</ul>
-						</nav>
-						<div class="header-button">
-							<div class="account-wrap">
-								<div class="account-item clearfix js-item-menu">
-									<div class="content">
-										Hi,<a class="js-acc-btn"><strong><?= $_SESSION['user_name'] ?></strong></a>
-									</div>
-									<div class="account-dropdown js-dropdown">
-										<div class="account-dropdown__body">
-											<div class="account-dropdown__item">
-												<a href="logout.php">
-													<i class="zmdi zmdi-power"></i>Logout
-												</a>
+		<!-- PAGE CONTAINER-->
+		<div class="page-container">
+			<!-- HEADER DESKTOP-->
+			<header class="header-desktop">
+				<div class="section__content section__content--p30">
+					<div class="container-fluid">
+						<div class="header-wrap">
+							<nav class="navbar-sidebar">
+								<ul class="list-unstyled navbar">
+									<li>
+										<a href="index.php" class="btn btn-info">Inventory</a>
+										<a href="costing.php" class="btn btn-info">Costing</a>
+									</li>
+								</ul>
+							</nav>
+							<div class="header-button">
+								<div class="account-wrap">
+									<div class="account-item clearfix js-item-menu">
+										<div class="content">
+											Hi,<a class="js-acc-btn"><strong><?= $_SESSION['user_name'] ?></strong></a>
+										</div>
+										<div class="account-dropdown js-dropdown">
+											<div class="account-dropdown__body">
+												<div class="account-dropdown__item">
+													<a href="logout.php">
+														<i class="zmdi zmdi-power"></i>Logout
+													</a>
+												</div>
 											</div>
 										</div>
 									</div>
@@ -92,34 +92,33 @@ $data = select('inventory');
 						</div>
 					</div>
 				</div>
-			</div>
-		</header>
+			</header>
 
-		<?php foreach ($data as $key => $value): ?>
-			<!-- Modal -->
-			<div class="modal fade" id="delete_stock-<?= $value['id'] ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-				<div class="modal-dialog" role="document">
-					<div class="modal-content" id="modal-popup-wrapper">
-						<div class="modal-header">
-							<h5 class="modal-title" id="exampleModalLabel">Confirmation</h5>
-							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-								<span aria-hidden="true">&times;</span>
-							</button>
-						</div>
-						<div class="modal-body">
-							Are you sure to delete <strong><?= $value['product_name'] ?> (<?= $value['category'] ?>)</strong>?
-						</div>
-						<div class="modal-footer">
-							<button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-							<!-- <button type="button" class="btn btn-primary">Yes</button> -->
-							<a href="delete.php?id=<?= $value['id']?>" class="btn btn-danger">Yes</a>
+			<?php foreach ($data as $key => $value): ?>
+				<!-- Modal -->
+				<div class="modal fade" id="delete_stock-<?= $value['id'] ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+					<div class="modal-dialog" role="document">
+						<div class="modal-content" id="modal-popup-wrapper">
+							<div class="modal-header">
+								<h5 class="modal-title" id="exampleModalLabel">Confirmation</h5>
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+							</div>
+							<div class="modal-body">
+								Are you sure to delete <strong><?= $value['product_name'] ?> (<?= $value['category'] ?>)</strong>?
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+								<!-- <button type="button" class="btn btn-primary">Yes</button> -->
+								<a href="delete.php?id=<?= $value['id']?>" class="btn btn-danger">Yes</a>
+							</div>
 						</div>
 					</div>
 				</div>
-			</div>
-		<?php endforeach ?>
+			<?php endforeach ?>
 
-		<div class="main-content">
-			<div class="section__content section__content--p30">
-				<div class="container-fluid">
-					<div class="card">
+			<div class="main-content">
+				<div class="section__content section__content--p30">
+					<div class="container-fluid">
+						<div class="card">
