@@ -11,6 +11,7 @@ if (isset($_POST['save-stock'])) {
 	$amount_per_kg = $_POST['amount_per_kg'];
 	$quality = $_POST['quality'];
 	$category = $_POST['category'];
+	$cargo = $_POST['cargo'];
 
 	$data = [
 		'product_name' => $name,
@@ -20,11 +21,16 @@ if (isset($_POST['save-stock'])) {
 		'total_amount_paid' => $total_amount,
 		'amount_per_kg' => $amount_per_kg,
 		'quality' => $quality,
-		'category' => $category
+		'category' => $category,
+		'cargo' => $cargo
 	];	
 
 	create('inventory', $data);
-	header('location: index.php');
+	?>
+	<script>
+		window.location.href = 'index.php';
+	</script>
+	<?php 
 }
 
 ?>
@@ -58,6 +64,10 @@ if (isset($_POST['save-stock'])) {
 			<div class="form-group col-md-3">
 				<label>Total Amount Paid</label>	
 				<input type="text" id="amount_paid" onkeypress="return IsNumeric(event);" class="form-control" name="total_amount" placeholder="Paid Amount">
+			</div>
+			<div class="form-group col-md-3">
+				<label>Cargo</label>	
+				<input type="text" id="cargo" onkeypress="return IsNumeric(event);" id="cargo" class="form-control" name="cargo" placeholder="Cargo">
 			</div>
 			<div class="form-group col-md-3">
 				<label>Amount/kg</label>	

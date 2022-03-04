@@ -38,6 +38,10 @@ $row = $row[0];
 				<input type="text" id="amount_paid" onkeypress="return IsNumeric(event);" value="<?= $row['total_amount_paid'] ?>" class="form-control" name="total_amount" placeholder="Paid Amount">
 			</div>
 			<div class="form-group col-md-3">
+				<label>Cargo</label>	
+				<input type="text" id="cargo" onkeypress="return IsNumeric(event);" id="cargo" value="<?= $row['cargo'] ?>" class="form-control" name="cargo" placeholder="Cargo">
+			</div>
+			<div class="form-group col-md-3">
 				<label>Amount/kg</label>	
 				<input type="text" onkeypress="return IsNumeric(event);" value="<?= $row['amount_per_kg'] ?>" class="form-control" readonly name="amount_per_kg" id="amount_per_kg" placeholder="Amount/kg">
 			</div>

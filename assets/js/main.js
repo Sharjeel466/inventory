@@ -5,12 +5,14 @@ $(document).on('change paste keyup', function() {
   var shortage = $('#shortage').val();
   var amount_paid = $('#amount_paid').val();
   var total_qty = $('#total_qty').val();
+  var cargo = $('#cargo').val();
+
+  var amount = (parseInt(cargo) + parseInt(amount_paid)) / parseInt(total_qty);
 
   var percentage = ((product_qty * shortage) / 100);
   var val = product_qty - percentage;
   $('#total_qty').val(val);
 
-  var amount = amount_paid / total_qty;
   $('#amount_per_kg').val(amount.toFixed(2));
 
 });
@@ -31,10 +33,12 @@ $(document).ready(function() {
         $(document).on('change', '.inventory', function(){
           var selected = $(this).val();
           var qty = $(this).find('option:selected').attr('qty');
+          // var text = $(this).find('option:selected').text();
           var data_id = $(this).data('id');
           var qty_length = $('.product_qty-'+data_id).attr('maxlength', qty.length);
           var t_price = $(this).find('option:selected').attr('price');
 
+          $('.product_qty-'+data_id).attr('product_id', selected);
           $('.prod_id-'+data_id).text(qty);
           $('.product_qty-'+data_id).val(qty);
           
@@ -69,18 +73,48 @@ $(document).ready(function() {
 
               var total_divide = required_qty/total_quantity;
               var require_divided = total_divide.toFixed(2);
-
+              $('#lot').val(require_divided);
               var a = [];
               y = 0;
               $('.t_qty').each( function() {
-                a[y++] = parseFloat($(this).val());
+                a[y++] = [parseFloat($(this).val()), parseInt($(this).attr('product_id'))];
               });
-              console.log(a)
 
-              // $.each(a, function(index, val) {
-              // var required_mul = val*require_divided;
-              // console.log(required_mul)
-              // });
+              z = 0;
+              var stock_in_db = [];
+              $.each(a, function(index, val) {
+                stock_in_db[z++] = [(parseFloat(val) * parseFloat(require_divided)).toFixed(2), val[1]];
+              });
+
+
+              abc = 0;
+              var val_from_user = [];
+              $.each(stock_in_db, function(index, val) {
+                val_from_user[abc++] = val[0];
+              });
+
+              cba = 0;
+              var stock_in_database = [];
+              $('.product_id').each(function() {
+                stock_in_database[cba++] = $(this).text();
+              });
+
+              var data_id = 1;
+              for (var i = 0; i < val_from_user.length; i++) { 
+                if (parseFloat(val_from_user[i]) <= parseInt(stock_in_database[i])) {
+                  $('.product_qty-'+data_id).css('borderColor', '#ced4da');
+                  // console.log(val_from_user[i]+' <= '+stock_in_database[i])
+                  
+                  data_id++;
+                }
+                else if(parseFloat(val_from_user[i]) > parseInt(stock_in_database[i])){                 
+                  $('.product_qty-'+data_id).css('borderColor', 'red');
+                  // console.log(val_from_user[i]+' > '+stock_in_database[i])
+                  
+                  data_id++;
+                }
+
+              }
 
             });
           });

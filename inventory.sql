@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 27, 2022 at 05:57 PM
+-- Generation Time: Mar 04, 2022 at 09:46 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 7.4.13
 
@@ -24,6 +24,30 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `costing`
+--
+
+CREATE TABLE `costing` (
+  `id` int(11) NOT NULL,
+  `time` varchar(255) NOT NULL,
+  `product_id` varchar(255) NOT NULL,
+  `user_qty` varchar(255) NOT NULL,
+  `required_qty` int(11) NOT NULL,
+  `total_amount` float NOT NULL,
+  `lot` float NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `costing`
+--
+
+INSERT INTO `costing` (`id`, `time`, `product_id`, `user_qty`, `required_qty`, `total_amount`, `lot`) VALUES
+(1, 'March 04, 2022 09:44:10 PM', '1', '150', 540, 24784, 1.35),
+(2, 'March 04, 2022 09:44:10 PM', '3', '250', 540, 24784, 1.35);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `inventory`
 --
 
@@ -34,10 +58,20 @@ CREATE TABLE `inventory` (
   `total_qty` int(11) NOT NULL,
   `shortage` int(11) NOT NULL,
   `total_amount_paid` int(11) NOT NULL,
-  `amount_per_kg` int(11) NOT NULL,
+  `amount_per_kg` float NOT NULL,
   `quality` int(11) NOT NULL,
-  `category` varchar(255) NOT NULL
+  `category` varchar(255) NOT NULL,
+  `cargo` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `inventory`
+--
+
+INSERT INTO `inventory` (`id`, `product_name`, `product_qty`, `total_qty`, `shortage`, `total_amount_paid`, `amount_per_kg`, `quality`, `category`, `cargo`) VALUES
+(1, 'Apple', 500, 340, 2, 32100, 66.16, 1, 'punjab', 320),
+(2, 'cherry', 2000, 1960, 2, 50000, 28.83, 1, 'gujrat', 6500),
+(3, 'mango', 650, 322, 12, 32000, 59.44, 1, 'multan', 2000);
 
 -- --------------------------------------------------------
 
@@ -65,6 +99,12 @@ INSERT INTO `users` (`id`, `name`, `email`, `password`, `mobile_number`) VALUES
 --
 
 --
+-- Indexes for table `costing`
+--
+ALTER TABLE `costing`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `inventory`
 --
 ALTER TABLE `inventory`
@@ -81,10 +121,16 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT for table `costing`
+--
+ALTER TABLE `costing`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT for table `inventory`
 --
 ALTER TABLE `inventory`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `users`

@@ -1,60 +1,49 @@
-<?php 
-include('list.php');
-require_once('conn.php');
-require_once('functions.php');
+<?php include('list.php');
+
 ?>
 
 <div class="card-header">
-	<h2>Costing</h2>
+	<h3>Costing</h3>
 </div>
 <div class="card-body">
-	<form action="" method="post">
-		<div class="row">
-			<div class="form-group col-md-4">
-				<label><strong>Select number of raw material</strong></label>
-				<?php
-				global $conn;
-
-				$select="SELECT * FROM inventory";
-				$result=mysqli_query($conn,$select);	
-
-				$costing_data = [];
-				while ($row = mysqli_fetch_assoc($result)) {
-					$costing_data[] = $row;
-				}
-				$costing_count = mysqli_num_rows($result);
-				
-				?>
-				<select id="mat-number" class="form-control">
-					<?php 
-					$count = 1;
-					foreach($costing_data as $key => $val){
-						?><option value="<?php echo $count ?>"><?php echo $count ?></option><?php
-						$count++;
-					}
-					
-					?>
-				</select>
-			</div>
-			<div class="form-group col-md-8" id="products-show-wrapper">
-
-			</div>
+	<a href="add_costing.php" class="btn btn-primary">Add Costing</a>
+</div>
+<div class="card-body">
+	
+	<div class="details-container">
+		<ul class="responsive-table">
+			<li class="table-header">
+				<div class="col col-1" data-label="#">#</div>
+				<div class="col">Product Name</div>
+				<div class="col">Product Category</div>
+				<div class="col">User Quantity</div>
+				<div class="col">Required Quantity</div>
+				<div class="col">Lot</div>
+				<div class="col">Time</div>
+				<div class="col">Total Amount</div>
+			</li>
+			<?php $n =1;
 			
-			<div class="col-md-4 mb-2 d-none">
-				<input type="hidden" class="form-control" id="total">
-				<input type="hidden" class="form-control" id="total-qty">
-			</div>
+			$slect ='SELECT * FROM `costing` LEFT JOIN `inventory` ON `costing`.`product_id` = `inventory`.`id`';
+			$r = mysqli_query($conn,$slect);
+			
+			while ($f = mysqli_fetch_assoc($r)) {?>
+				<li class="table-row">
+					<div class="col col-1" data-label="#"><?= $n++ ?></div>
+					<div class="col" data-label="Name-"><?= $f['product_name'] ?></div>
+					<div class="col" data-label="Category-"><?= $f['category'] ?></div>
+					<div class="col" data-label="Category-"><?= $f['user_qty'] ?></div>
+					<div class="col" data-label="Total Qty-"><?= $f['required_qty'] ?></div>
+					<div class="col" data-label="Total Qty-"><?= $f['lot'] ?></div>
+					<div class="col" data-label="Total Qty-"><?= $f['time'] ?></div>
+					<div class="col" data-label="Qty after Shortage-"><?= $f['total_amount'] ?></div>
+				</li> 
+				<?php 
+			}
+			?>
 
-			<div class="col-md-4 mb-2">
-				<strong>Required</strong>
-				<input type="text" placeholder="Required" id="required-qty" class="form-control">
-			</div>
-		</div>
-		<hr>
-		<div class="form-group">
-			<button type="submit" name="save-stock" class="btn btn-primary">Submit</button>
-		</div>
-	</form>
+		</ul>
+	</div>
 </div>
 
 <?php 

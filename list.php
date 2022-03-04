@@ -95,7 +95,7 @@ $data = select('inventory');
 			</header>
 
 			<?php foreach ($data as $key => $value): ?>
-				<!-- Modal -->
+				
 				<div class="modal fade" id="delete_stock-<?= $value['id'] ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 					<div class="modal-dialog" role="document">
 						<div class="modal-content" id="modal-popup-wrapper">
@@ -110,7 +110,7 @@ $data = select('inventory');
 							</div>
 							<div class="modal-footer">
 								<button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-								<!-- <button type="button" class="btn btn-primary">Yes</button> -->
+								
 								<a href="delete.php?id=<?= $value['id']?>" class="btn btn-danger">Yes</a>
 							</div>
 						</div>

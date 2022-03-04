@@ -59,6 +59,7 @@ $data = select('inventory');
 				<div class="col">Qty after Shortage</div>
 				<div class="col">Shortage</div>
 				<div class="col">Total paid Amount</div>
+				<div class="col">Cargo</div>
 				<div class="col">Amount/kg</div>
 				<div class="col">Quality</div>
 				<div class="col" colspan="2">Action</div>
@@ -73,6 +74,7 @@ $data = select('inventory');
 					<div class="col" data-label="Qty after Shortage-"><?= $value['total_qty'] ?></div>
 					<div class="col" data-label="Shortage-"><?= $value['shortage'] ?></div>
 					<div class="col" data-label="Total Amount Paid-"><?= $value['total_amount_paid'] ?></div>
+					<div class="col" data-label="Amount/kg-"><?= $value['cargo'] ?></div>
 					<div class="col" data-label="Amount/kg-"><?= $value['amount_per_kg'] ?></div>
 					<div class="col" data-label="Quality-"><?= $value['quality'] ?></div>
 					<div class="btn-group" role="group">

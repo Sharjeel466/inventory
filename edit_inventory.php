@@ -6,7 +6,6 @@ if(isset($_POST['update-stock'])){
 	// unset($data['update-stock']);
 	// $where = ['id'=>$_POST['id']];
 	// unset($data['id']);
-
 	$update = "UPDATE `inventory` SET 
 	`product_name` = '".$data['name']."',
 	`product_qty` = '".$data['qty']."',
@@ -15,7 +14,8 @@ if(isset($_POST['update-stock'])){
 	`total_amount_paid` = '".$data['total_amount']."',
 	`amount_per_kg` = '".$data['amount_per_kg']."',
 	`quality` = '".$data['quality']."',
-	`category` = '".$data['category']."'
+	`category` = '".$data['category']."',
+	`cargo` = '".$data['cargo']."'
 	WHERE `id` = '".$data['id']."' ";
 	
 	mysqli_query($conn, $update);
