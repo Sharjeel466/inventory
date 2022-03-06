@@ -53,6 +53,17 @@ if (isset($_POST['save-stock'])) {
 
 	}
 
+	date_default_timezone_set("Asia/Calcutta");
+
+	$logs = [
+		'name' => $_SESSION['user_id'],
+		'action' => 'Production Added',
+		'description' => 'Created new Production',
+		'time' => date("F d, Y h:i:s A"),
+	];
+
+	create('logs', $logs);
+
 	header('location: costing.php');
 
 }

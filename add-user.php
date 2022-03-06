@@ -27,6 +27,18 @@ if (isset($_POST['save-user'])) {
 	];	
 
 	create('users', $data);
+
+	date_default_timezone_set("Asia/Calcutta");
+
+	$logs = [
+		'name' => $_SESSION['user_id'],
+		'action' => 'User Added',
+		'description' => 'Inserted new User in the system',
+		'time' => date("F d, Y h:i:s A"),
+	];
+
+	create('logs', $logs);
+
 	?>
 	<script>
 		window.location.href = 'users.php';

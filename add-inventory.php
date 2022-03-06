@@ -25,6 +25,17 @@ if (isset($_POST['save-stock'])) {
 	];	
 
 	create('inventory', $data);
+	
+	date_default_timezone_set("Asia/Calcutta");
+
+	$logs = [
+		'name' => $_SESSION['user_id'],
+		'action' => 'Inventory Added',
+		'description' => 'Added new Product',
+		'time' => date("F d, Y h:i:s A"),
+	];
+
+	create('logs', $logs);
 	?>
 	<script>
 		window.location.href = 'index.php';

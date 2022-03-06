@@ -1,4 +1,4 @@
-<?php 
+<?php
 include('list.php');
 
 if ($_SESSION['role'] != 'admin') {
@@ -22,8 +22,22 @@ if(isset($_POST['update-user'])){
 	WHERE `id` = '".$data['id']."' ";
 	
 	mysqli_query($conn, $update);
-	
-	header("location:users.php");
+
+	date_default_timezone_set("Asia/Calcutta");
+
+	$logs = [
+		'name' => $_SESSION['user_id'],
+		'action' => 'User updated',
+		'description' => 'Updated the User',
+		'time' => date("F d, Y h:i:s A"),
+	];
+
+	create('logs', $logs);
+	?>
+	<script>
+		window.location.href = 'users.php';
+	</script>
+	<?php 
 }
 
 ?>

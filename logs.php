@@ -9,7 +9,7 @@ if ($_SESSION['role'] != 'admin') {
 	<?php 
 }
 
-$select = 'SELECT * FROM `users` WHERE `role` != "admin"';
+$select = 'SELECT * FROM `logs` LEFT JOIN `users` ON `logs`.`name` = `users`.`id`  ORDER BY `logs`.`id` DESC';
 $result = mysqli_query($conn,$select);
 
 ?>
@@ -24,6 +24,7 @@ $result = mysqli_query($conn,$select);
 			<li class="table-header">
 				<div class="col col-1" data-label="#">#</div>
 				<div class="col">User Name</div>
+				<div class="col">User Role</div>
 				<div class="col">Action</div>
 				<div class="col">Description</div>
 				<div class="col">Time</div>
@@ -33,9 +34,10 @@ $result = mysqli_query($conn,$select);
 				<li class="table-row">
 					<div class="col col-1" data-label="#"><?= $n++ ?></div>
 					<div class="col" data-label="Name-"><?= $value['name'] ?></div>
-					<div class="col" data-label="Category-"><?= $value['email'] ?></div>
-					<div class="col" data-label="Qty after Shortage-"><?= $value['mobile_number'] ?></div>
-					<div class="col" data-label="Shortage-"><?= $value['address'] ?></div>
+					<div class="col" data-label="Category-"><?= $value['role'] ?></div>
+					<div class="col" data-label="Category-"><?= $value['action'] ?></div>
+					<div class="col" data-label="Qty after Shortage-"><?= $value['description'] ?></div>
+					<div class="col" data-label="Shortage-"><?= $value['time'] ?></div>
 				<?php } ?>
 
 			</ul>

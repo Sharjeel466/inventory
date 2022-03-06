@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 06, 2022 at 05:53 PM
+-- Generation Time: Mar 06, 2022 at 09:47 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 7.4.13
 
@@ -57,14 +57,19 @@ CREATE TABLE `inventory` (
   `cargo` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+-- --------------------------------------------------------
+
 --
--- Dumping data for table `inventory`
+-- Table structure for table `logs`
 --
 
-INSERT INTO `inventory` (`id`, `product_name`, `product_qty`, `total_qty`, `shortage`, `total_amount_paid`, `amount_per_kg`, `quality`, `category`, `cargo`) VALUES
-(1, 'Apple', 500, 53, 2, 32100, 66.16, 1, 'punjab', 320),
-(2, 'cherry', 2000, 1548, 2, 50000, 28.83, 1, 'gujrat', 6500),
-(3, 'mango', 650, 322, 12, 32000, 59.44, 1, 'multan', 2000);
+CREATE TABLE `logs` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `action` varchar(255) NOT NULL,
+  `description` varchar(255) NOT NULL,
+  `time` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -87,11 +92,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `mobile_number`, `address`, `role`) VALUES
-(1, 'user', 'user@gmail.com', '21232f297a57a5a743894a0e4a801fc3', '0123456789', 'abcd', 'admin'),
-(2, 'Ali', 'ali@gmail.com', 'ali', '1231231', 'fdsa ffd,sdfgdf', 'employee'),
-(3, 'Aqib', 'ahmed@gmail.com', 'aqib', '34423223', 'jokin3n3io3io', 'employee'),
-(4, 'ali', 'ali@gmail.com', '21232f297a57a5a743894a0e4a801fc3', '', '', 'employee'),
-(5, 'Asim', 'asim@gmail.com', '097d2f1bc2a7b00f7135e712e710e8e3', '', '', 'employee');
+(1, 'admin', 'admin@gmail.com', '21232f297a57a5a743894a0e4a801fc3', '0123456789', 'abc, xyz', 'admin');
 
 --
 -- Indexes for dumped tables
@@ -107,6 +108,12 @@ ALTER TABLE `costing`
 -- Indexes for table `inventory`
 --
 ALTER TABLE `inventory`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `logs`
+--
+ALTER TABLE `logs`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -129,13 +136,19 @@ ALTER TABLE `costing`
 -- AUTO_INCREMENT for table `inventory`
 --
 ALTER TABLE `inventory`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `logs`
+--
+ALTER TABLE `logs`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

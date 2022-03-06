@@ -1,11 +1,10 @@
 <?php 
+session_start();
 require_once"functions.php";
 
 if(isset($_POST['update-stock'])){
 	$data = $_POST;
-	// unset($data['update-stock']);
-	// $where = ['id'=>$_POST['id']];
-	// unset($data['id']);
+
 	$update = "UPDATE `inventory` SET 
 	`product_name` = '".$data['name']."',
 	`product_qty` = '".$data['qty']."',
@@ -19,6 +18,17 @@ if(isset($_POST['update-stock'])){
 	WHERE `id` = '".$data['id']."' ";
 	
 	mysqli_query($conn, $update);
+
+	date_default_timezone_set("Asia/Calcutta");
+
+	$logs = [
+		'name' => $_SESSION['user_id'],
+		'action' => 'Inventory Update',
+		'description' => 'Updated the Product',
+		'time' => date("F d, Y h:i:s A"),
+	];
+
+	create('logs', $logs);
 	
 	header("location:index.php");
 }
