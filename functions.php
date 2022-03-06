@@ -19,8 +19,11 @@ function login($table,$email,$password){
 
 		while ($row = mysqli_fetch_assoc($result)) {
 			if($row['email'] === $email && $row['password'] === $password){
+				
 				$_SESSION['user_name'] = $row['name'];
-				header("location: ../inventory");
+				$_SESSION['user_id'] = $row['id'];
+				$_SESSION['role'] = $row['role'];
+				
 			}
 
 		}

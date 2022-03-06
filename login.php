@@ -13,6 +13,8 @@ if (isset($_POST['login'])) {
 	$password = $_POST['password'];
 
 	login('users', $email, $password);
+
+	header("location: ../inventory");
 }
 
 ?>

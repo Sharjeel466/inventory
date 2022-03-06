@@ -23,8 +23,8 @@ $data = select('inventory');
 			<div class="container-fluid">
 				<ul class="navbar-mobile__list list-unstyled">
 					<li>
-						<a href="index.php"><h4>Inventory</h4></a>
-						<a href="costing.php"><h4>Costing</h4></a>
+						<!-- <a href="index.php"><h4>Inventory</h4></a>
+						<a href="costing.php"><h4>Costing</h4></a> -->
 					</li>
 				</ul>
 			</div>
@@ -68,7 +68,11 @@ $data = select('inventory');
 									<li>
 										<a href="index.php" class="btn btn-info">Inventory</a>
 										<a href="costing.php" class="btn btn-info">Production</a>
+
+										<?php if ($_SESSION['role'] == 'admin'): ?>
 										<a href="users.php" class="btn btn-info">Users</a>
+										<a href="logs.php" class="btn btn-info">Logs</a>
+										<?php endif ?>
 									</li>
 								</ul>
 							</nav>
@@ -76,7 +80,7 @@ $data = select('inventory');
 								<div class="account-wrap">
 									<div class="account-item clearfix js-item-menu">
 										<div class="content">
-											Hi,<a class="js-acc-btn"><strong><?= $_SESSION['user_name'] ?></strong></a>
+											Hi, <a class="js-acc-btn"><strong><?= $_SESSION['user_name'] ?></strong></a>
 										</div>
 										<div class="account-dropdown js-dropdown">
 											<div class="account-dropdown__body">

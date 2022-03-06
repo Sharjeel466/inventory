@@ -49,16 +49,17 @@ require_once('functions.php');
 				<strong>Required</strong>
 				<input type="text" onkeypress="return IsNumeric(event);" name="required_qty" placeholder="Required" id="required-qty" class="form-control" required autocomplete="off">
 			</div>
+			<?php if ($_SESSION['role'] == 'admin'): ?>
+				<div class="col-md-4 mb-2">
+					<strong>Total/kg</strong>
+					<input type="text" class="form-control" placeholder="Total/kg" readonly name="total_per_kg" id="total">
+				</div>
 
-			<div class="col-md-4 mb-2">
-				<strong>Total/kg</strong>
-				<input type="text" class="form-control" placeholder="Total/kg" readonly name="total_per_kg" id="total">
-			</div>
-
-			<div class="col-md-4 mb-2">
-				<strong>Total</strong>
-				<input type="text" class="form-control" placeholder="Total" readonly name="total" id="all_total">
-			</div>
+				<div class="col-md-4 mb-2">
+					<strong>Total</strong>
+					<input type="text" class="form-control" placeholder="Total" readonly name="total" id="all_total">
+				</div>
+			<?php endif ?>
 
 		</div>
 		<hr>

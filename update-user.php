@@ -1,4 +1,14 @@
 <?php 
+include('list.php');
+
+if ($_SESSION['role'] != 'admin') {
+	?>
+	<script>
+		window.location.href = '../inventory';
+	</script>
+	<?php 
+}
+
 require_once"functions.php";
 
 if(isset($_POST['update-user'])){

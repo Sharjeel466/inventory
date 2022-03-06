@@ -1,6 +1,14 @@
 <?php 
 include('list.php');
 
+if ($_SESSION['role'] != 'admin') {
+	?>
+	<script>
+		window.location.href = '../inventory';
+	</script>
+	<?php 
+}
+
 if (isset($_POST['save-user'])) {
 
 	$user_name = $_POST['user_name'];

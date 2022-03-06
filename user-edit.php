@@ -1,6 +1,14 @@
 <?php 
 include('list.php');
 
+if ($_SESSION['role'] != 'admin') {
+	?>
+	<script>
+		window.location.href = '../inventory';
+	</script>
+	<?php 
+}
+
 $where = ['id' => $_GET['id']];
 $row = select('users', $where);
 $row = $row[0];
