@@ -30,6 +30,7 @@ $(document).ready(function() {
       success: function(response){
 
         $('#products-show-wrapper').html(response);
+
         $(document).on('change', '.inventory', function(){
           var selected = $(this).val();
           var qty = $(this).find('option:selected').attr('qty');
@@ -58,27 +59,50 @@ $(document).ready(function() {
             $('.hidden_data').each( function() {
               t += parseFloat($(this).val());
             });
-            $('#total').val(t.toFixed(2));
 
             var q = 0;
             $('.t_qty').each( function() {
               q += parseFloat($(this).val());
             });
+
             $('#total-qty').val(q.toFixed(2));
+            var quantity = $('#total-qty').val();
+            
+            $('#total').val((t.toFixed(2) / quantity).toFixed(2));
+
+            // var total_per_kg = $('#total').val();
+            // required_qty * total_per_kg; 
 
             var total_quantity = $('#total-qty').val();
 
             $(document).on('keyup', '#required-qty', function() {
               var required_qty = $(this).val();
 
+              var total_per_kg = $('#total').val();
+              var all_total = required_qty * total_per_kg; 
+
+              // $('.product_required-'+data_id).val();
+              // $('.product-required-'+data_id).val(x.toFixed(2));
+
+              $('#all_total').val(all_total.toFixed(2));
+
               var total_divide = required_qty/total_quantity;
               var require_divided = total_divide.toFixed(2);
-              $('#lot').val(require_divided);
+              // $('#lot').val(require_divided);
+              // var answer = require_divided * $('.product_qty-'+data_id).val();
+              // console.log($('.product_qty-'+data_id).val())
+
+
               var a = [];
               y = 0;
               $('.t_qty').each( function() {
                 a[y++] = [parseFloat($(this).val()), parseInt($(this).attr('product_id'))];
               });
+
+              for (var i = 1; i <= a.length; i++) {
+                var find_stock = require_divided * $('.product_qty-'+i).val();
+                $('.product-required-'+i).val(find_stock);
+              }
 
               z = 0;
               var stock_in_db = [];
@@ -119,9 +143,9 @@ $(document).ready(function() {
             });
           });
         })   
-      }
-    });
-  });
+}
+});
+});
 });
 
 var specialKeys = new Array();

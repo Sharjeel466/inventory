@@ -67,7 +67,7 @@ $data = select('inventory');
 								<ul class="list-unstyled navbar">
 									<li>
 										<a href="index.php" class="btn btn-info">Inventory</a>
-										<a href="costing.php" class="btn btn-info">Costing</a>
+										<a href="costing.php" class="btn btn-info">Production</a>
 										<a href="users.php" class="btn btn-info">Users</a>
 									</li>
 								</ul>

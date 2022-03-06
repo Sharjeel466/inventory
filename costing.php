@@ -3,10 +3,10 @@
 ?>
 
 <div class="card-header">
-	<h3>Costing</h3>
+	<h3>Production</h3>
 </div>
 <div class="card-body">
-	<a href="add_costing.php" class="btn btn-primary">Add Costing</a>
+	<a href="add_costing.php" class="btn btn-primary">Add Production</a>
 </div>
 <div class="card-body">
 	
@@ -18,13 +18,14 @@
 				<div class="col">Product Category</div>
 				<div class="col">User Quantity</div>
 				<div class="col">Required Quantity</div>
-				<div class="col">Lot</div>
+				<div class="col">Total/kg</div>
+				<div class="col">Total</div>
 				<div class="col">Time</div>
 				<div class="col">Total Amount</div>
 			</li>
 			<?php $n =1;
 			
-			$slect ='SELECT * FROM `costing` LEFT JOIN `inventory` ON `costing`.`product_id` = `inventory`.`id`';
+			$slect ='SELECT * FROM `costing` LEFT JOIN `inventory` ON `costing`.`product_id` = `inventory`.`id` ORDER BY `costing`.`id` DESC';
 			$r = mysqli_query($conn,$slect);
 			
 			while ($f = mysqli_fetch_assoc($r)) {?>
@@ -34,9 +35,10 @@
 					<div class="col" data-label="Category-"><?= $f['category'] ?></div>
 					<div class="col" data-label="Category-"><?= $f['user_qty'] ?></div>
 					<div class="col" data-label="Total Qty-"><?= $f['required_qty'] ?></div>
-					<div class="col" data-label="Total Qty-"><?= $f['lot'] ?></div>
+					<div class="col" data-label="Total Qty-"><?= $f['total_per_kg'] ?></div>
+					<div class="col" data-label="Total Qty-"><?= $f['total'] ?></div>
 					<div class="col" data-label="Total Qty-"><?= $f['time'] ?></div>
-					<div class="col" data-label="Qty after Shortage-"><?= $f['total_amount'] ?></div>
+					<div class="col" data-label="Total Qty-"><?= $f['total_product_qty'] ?></div>
 				</li> 
 				<?php 
 			}

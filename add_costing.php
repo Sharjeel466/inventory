@@ -5,7 +5,7 @@ require_once('functions.php');
 ?>
 
 <div class="card-header">
-	<h2>Costing</h2>
+	<h2>Production</h2>
 </div>
 <div class="card-body">
 	<form action="save-costing.php" method="post">
@@ -51,13 +51,13 @@ require_once('functions.php');
 			</div>
 
 			<div class="col-md-4 mb-2">
-				<strong>Total</strong>
-				<input type="text" class="form-control" placeholder="Total Amount" readonly name="total_amount" id="total">
+				<strong>Total/kg</strong>
+				<input type="text" class="form-control" placeholder="Total/kg" readonly name="total_per_kg" id="total">
 			</div>
 
 			<div class="col-md-4 mb-2">
-				<strong>Lot</strong>
-				<input type="text" class="form-control" placeholder="Lot" readonly name="lot" id="lot">
+				<strong>Total</strong>
+				<input type="text" class="form-control" placeholder="Total" readonly name="total" id="all_total">
 			</div>
 
 		</div>

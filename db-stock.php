@@ -36,9 +36,10 @@ function ajax_select($t){
 			<div class="form-group col-md-6">
 				<label>Stock: <strong class="prod_id-<?= $x ?> product_id"></strong></label>
 
-				<input type="text" onkeypress="return IsNumeric(event);" name="user_qty[]" maxlength="" product_id="" required class="form-control t_qty product_qty-<?= $x ?>" placeholder="Required Qty">
+				<input type="text" onkeypress="return IsNumeric(event);" name="user_qty[]" maxlength="" product_id="" required class="form-control t_qty product_qty-<?= $x ?>" placeholder="Required Qty" autocomplete="off">
 				
 				<input type="hidden" id="hidden-product_qty-<?= $x ?>" class="hidden_data">
+				<input type="hidden" name="total_product_qty[]" class="product-required-<?= $x ?>">
 			</div>
 		</div>
 

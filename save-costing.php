@@ -6,39 +6,47 @@ require_once('functions.php');
 if (isset($_POST['save-stock'])) {
 
 	$product_id = $_POST['product_id'];
-	// $p_id=implode(',', $product_id);
-
 	$user_qty = $_POST['user_qty'];
-	// $u_qty=implode(',', $user_qty);
-
+	$total_product_qty = $_POST['total_product_qty'];
 	$required_qty = $_POST['required_qty'];
-	$lot = $_POST['lot'];
-	$total_amount = $_POST['total_amount'];
+	$total_per_kg = $_POST['total_per_kg'];
+	$total = $_POST['total'];
 
 	$data = [
 		'time' => date("F d, Y h:i:s A"),
 		'product_id' => $product_id,
 		'user_qty' => $user_qty,
+		'total_product_qty' => $total_product_qty,
 		'required_qty' => $required_qty,
-		'lot' => $lot,
-		'total_amount' => $total_amount
+		'total_per_kg' => $total_per_kg,
+		'total' => $total
 	];
 
 	for ($i=0; $i < count($data['product_id']); $i++) { 
 
-		$insert='INSERT INTO `costing` (`time`, `product_id`, `user_qty`, `required_qty`, `lot`, `total_amount`) VALUES ("'.$data['time'].'", "'.$data['product_id'][$i].'", "'.$data['user_qty'][$i].'", "'.$data['required_qty'].'", "'.$data['lot'].'", "'.$data['total_amount'].'")';
+		$insert='INSERT INTO `costing` (
+			`time`, `product_id`, `user_qty`, `required_qty`, `total_per_kg`, `total`, `total_product_qty`) 
+		VALUES (
+			"'.$data['time'].'",
+			"'.$data['product_id'][$i].'",
+			"'.$data['user_qty'][$i].'", 
+			"'.$data['required_qty'].'",
+			"'.$data['total_per_kg'].'",
+			"'.$data['total'].'",
+			"'.$data['total_product_qty'][$i].'"
+		)';
 
-			$result=mysqli_query($conn,$insert);
-	
-		}
+		$result=mysqli_query($conn,$insert);
 		
+	}
+
 	foreach ($product_id as $key => $value) {
 
 		$select="SELECT * FROM `inventory` WHERE `id` = '".$value."'";
 		$result=mysqli_query($conn,$select);
 		$f = mysqli_fetch_assoc($result);
 
-		$remaining_stock = $f['total_qty'] - $user_qty[$key];
+		$remaining_stock = $f['total_qty'] - $total_product_qty[$key];
 
 		$update = "UPDATE `inventory` SET `total_qty` = '".$remaining_stock."' WHERE `id` = '".$value."'";
 		mysqli_query($conn,$update);
@@ -47,6 +55,6 @@ if (isset($_POST['save-stock'])) {
 
 	header('location: costing.php');
 
-	}
+}
 
 ?>
