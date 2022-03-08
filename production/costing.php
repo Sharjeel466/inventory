@@ -1,12 +1,11 @@
-<?php include('list.php');
-
+<?php require_once('../navbar/list.php');
 ?>
 
 <div class="card-header">
 	<h3>Production</h3>
 </div>
 <div class="card-body">
-	<a href="add_costing.php" class="btn btn-primary">Add Production</a>
+	<a href="../production/add-production" class="btn btn-primary">Add Production</a>
 </div>
 <div class="card-body">
 	
@@ -24,11 +23,9 @@
 				<div class="col">Total Amount</div>
 			</li>
 			<?php $n =1;
+			$select = leftJoin('costing', 'inventory', 'product_id', 'id', 'costing', 'id');
 			
-			$slect ='SELECT * FROM `costing` LEFT JOIN `inventory` ON `costing`.`product_id` = `inventory`.`id` ORDER BY `costing`.`id` DESC';
-			$r = mysqli_query($conn,$slect);
-			
-			while ($f = mysqli_fetch_assoc($r)) {?>
+			foreach ($select as $key => $f) {?>
 				<li class="table-row">
 					<div class="col col-1" data-label="#"><?= $n++ ?></div>
 					<div class="col" data-label="Name-"><?= $f['product_name'] ?></div>
@@ -49,5 +46,5 @@
 </div>
 
 <?php 
-include('index-end.php');
+require_once('../include/index-end.php');
 ?>

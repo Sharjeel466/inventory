@@ -1,21 +1,20 @@
 <?php 
 session_start();
-require_once('conn.php');
-require_once('functions.php');
+require_once('../config/conn.php');
+require_once('../helper/functions.php');
 
 ajax_select('inventory');
 
 function ajax_select($t){
-	global $conn;
 
 	$mat_number = $_GET['mat_number'];
-	$select="SELECT * FROM inventory";
-	$result=mysqli_query($conn,$select);	
+	$result = select('inventory');
 
 	$costing_data = [];
-	while ($row = mysqli_fetch_assoc($result)) {
+	foreach ($result as $key => $row) {
 		$costing_data[] = $row;
 	}
+
 	$count = 1; 
 	for ($x = 1; $x <= $mat_number; $x++) {
 

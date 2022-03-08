@@ -1,7 +1,7 @@
 <?php 
 session_start();
-require_once('conn.php');
-require_once('functions.php');
+require_once('../config/conn.php');
+require_once('../helper/functions.php');
 
 if (isset($_POST['save-stock'])) {
 
@@ -24,7 +24,7 @@ if (isset($_POST['save-stock'])) {
 
 	for ($i=0; $i < count($data['product_id']); $i++) { 
 
-		$insert='INSERT INTO `costing` (
+		$insert = 'INSERT INTO `costing` (
 			`time`, `product_id`, `user_qty`, `required_qty`, `total_per_kg`, `total`, `total_product_qty`) 
 		VALUES (
 			"'.$data['time'].'",
@@ -64,7 +64,7 @@ if (isset($_POST['save-stock'])) {
 
 	create('logs', $logs);
 
-	header('location: costing.php');
+	header('location: ../production/costing');
 
 }
 

@@ -1,10 +1,10 @@
 <?php 
-include('list.php');
+require_once('../navbar/list.php');
 
 if ($_SESSION['role'] != 'admin') {
 	?>
 	<script>
-		window.location.href = '../inventory';
+		window.location.href = '../index/';
 	</script>
 	<?php 
 }
@@ -14,10 +14,10 @@ $row = select('users', $where);
 $row = $row[0];
 ?>
 <div class="card-header">
-	<h2>Update Update</h2>
+	<h2>Update User</h2>
 </div>
 <div class="card-body">
-	<form action="update-user.php" method="POST">
+	<form action="../users/user-update" method="POST">
 		<div class="row">
 			<input type="hidden" name="id" value="<?= $row['id'] ?>">
 			<div class="form-group col-md-3">
@@ -44,5 +44,5 @@ $row = $row[0];
 </div>
 
 <?php 
-include('index-end.php');
+require_once('../include/index-end.php');
 ?>

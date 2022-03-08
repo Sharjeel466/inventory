@@ -1,5 +1,5 @@
 <?php 
-require_once('conn.php');
+require_once('../config/conn.php');
 
 function dd($data)
 {
@@ -10,6 +10,7 @@ function dd($data)
 
 function login($table,$email,$password){
 	global $conn;
+
 	$password = md5($password);
 
 	$sql = "SELECT * FROM `".$table."` WHERE `email` = '".$email."' AND `password` = '".$password."'";
@@ -31,20 +32,20 @@ function login($table,$email,$password){
 }
 
 function validate($data){
-	$data=trim($data);
-	$data=stripslashes($data);
-	$data=htmlspecialchars($data);
+	$data = trim($data);
+	$data = stripslashes($data);
+	$data = htmlspecialchars($data);
 	return $data;
 }
 
-function create($table,$data){
+function create($table, $data){
 	global $conn;
 	$col=(array_keys($data));
 	
 	$da=implode(",", $col);
 	
 	$ad=implode('","', $data);
-
+	
 	$insert='INSERT INTO '.$table.' ('.$da.') VALUES ("'.$ad.'")';
 	
 	$result=mysqli_query($conn,$insert);
@@ -78,11 +79,12 @@ function where($wh){
 	return $q1;
 }
 
-function delete($t,$id,$wh=[]){
+function delete($t, $id){
 	global $conn;
-	$q1=where($wh);
-	$del="DELETE FROM $t WHERE id='$id'";
-	$result=mysqli_query($conn,$del);
+
+	$del = "DELETE FROM `".$t."` WHERE `id` = '".$id."'";
+	$result = mysqli_query($conn, $del);
+	
 }
 
 function update($table,$data,$where=[]){
@@ -106,6 +108,20 @@ function update($table,$data,$where=[]){
 	$update="UPDATE $table SET ".$a1.' '.$q1;
 
 	$result=mysqli_query($conn,$update);
+}
+
+function leftJoin($main_table, $left_table, $main_table_index, $left_table_index, $order_by_table, $order_by_column)
+{
+	global $conn;
+
+	$select = 'SELECT * FROM `'.$main_table.'` LEFT JOIN `'.$left_table.'` ON `'.$main_table.'`.`'.$main_table_index.'` = `'.$left_table.'`.`'.$left_table_index.'` ORDER BY `'.$order_by_table.'`.`'.$order_by_column.'` DESC';
+	$result = mysqli_query($conn, $select);
+
+	$data=[];
+	while ($row = mysqli_fetch_assoc($result)) {
+		$data[] = $row;
+	}
+	return ($data);
 }
 
 ?>

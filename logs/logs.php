@@ -1,17 +1,15 @@
 <?php
-include('list.php');
+require_once('../navbar/list.php');
 
 if ($_SESSION['role'] != 'admin') {
 	?>
 	<script>
-		window.location.href = '../inventory';
+		window.location.href = '../index/';
 	</script>
 	<?php 
 }
 
-$select = 'SELECT * FROM `logs` LEFT JOIN `users` ON `logs`.`name` = `users`.`id`  ORDER BY `logs`.`id` DESC';
-$result = mysqli_query($conn,$select);
-
+$result = leftJoin('logs', 'users', 'name', 'id', 'logs', 'id');
 ?>
 
 <div class="card-header">
@@ -30,7 +28,8 @@ $result = mysqli_query($conn,$select);
 				<div class="col">Time</div>
 			</li>
 			<?php $n =1;?>
-			<?php while ($value = mysqli_fetch_assoc($result)) { ?>
+				
+			<?php foreach ($result as $key => $value): ?>
 				<li class="table-row">
 					<div class="col col-1" data-label="#"><?= $n++ ?></div>
 					<div class="col" data-label="Name-"><?= $value['name'] ?></div>
@@ -38,12 +37,12 @@ $result = mysqli_query($conn,$select);
 					<div class="col" data-label="Category-"><?= $value['action'] ?></div>
 					<div class="col" data-label="Qty after Shortage-"><?= $value['description'] ?></div>
 					<div class="col" data-label="Shortage-"><?= $value['time'] ?></div>
-				<?php } ?>
+			<?php endforeach ?>
 
 			</ul>
 		</div>
 	</div>
 
 	<?php 
-	include('index-end.php');
+	require_once('../include/index-end.php');
 ?>

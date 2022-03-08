@@ -1,10 +1,10 @@
 <?php 
-include('list.php');
+require_once('../navbar/list.php');
 
 if ($_SESSION['role'] != 'admin') {
 	?>
 	<script>
-		window.location.href = '../inventory';
+		window.location.href = '../index/';
 	</script>
 	<?php 
 }
@@ -41,7 +41,7 @@ if (isset($_POST['save-user'])) {
 
 	?>
 	<script>
-		window.location.href = 'users.php';
+		window.location.href = '../users/users';
 	</script>
 	<?php 
 }
@@ -52,7 +52,7 @@ if (isset($_POST['save-user'])) {
 	<h2>Add User</h2>
 </div>
 <div class="card-body">
-	<form action="add-user.php" method="post">
+	<form action="../users/add-user" method="post">
 		<div class="row">
 			<div class="form-group col-md-3">
 				<label>User Name</label>
@@ -83,5 +83,5 @@ if (isset($_POST['save-user'])) {
 </div>
 
 <?php 
-include('index-end.php');
+require_once('../include/index-end.php');
 ?>

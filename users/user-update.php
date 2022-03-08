@@ -1,15 +1,15 @@
 <?php
-include('list.php');
+require_once('../navbar/list.php');
 
 if ($_SESSION['role'] != 'admin') {
 	?>
 	<script>
-		window.location.href = '../inventory';
+		window.location.href = '../index/';
 	</script>
 	<?php 
 }
 
-require_once"functions.php";
+require_once('../helper/functions.php');
 
 if(isset($_POST['update-user'])){
 	$data = $_POST;
@@ -35,7 +35,7 @@ if(isset($_POST['update-user'])){
 	create('logs', $logs);
 	?>
 	<script>
-		window.location.href = 'users.php';
+		window.location.href = '../users/users';
 	</script>
 	<?php 
 }

@@ -1,5 +1,5 @@
 <?php 
-include('list.php');
+require_once('../navbar/list.php');
 if (isset($_POST['save-stock'])) {
 
 	$name = $_POST['name'];
@@ -38,7 +38,7 @@ if (isset($_POST['save-stock'])) {
 	create('logs', $logs);
 	?>
 	<script>
-		window.location.href = 'index.php';
+		window.location.href = '../index/';
 	</script>
 	<?php 
 }
@@ -86,7 +86,7 @@ if (isset($_POST['save-stock'])) {
 			<div class="form-group col-md-3">
 				<label>Quality</label>
 				<select class="form-control" name="quality">
-					<option value="no quality selected">---Select Quality---</option>
+					<option value="0">---Select Quality---</option>
 					<?php for ($i=1; $i < 11; $i++) { ?>
 						<option value="<?= $i ?>"><?= $i ?></option>
 					<?php } ?>
@@ -100,5 +100,5 @@ if (isset($_POST['save-stock'])) {
 </div>
 
 <?php 
-include('index-end.php');
+include('../include/index-end.php');
 ?>

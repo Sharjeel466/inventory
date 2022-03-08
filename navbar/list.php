@@ -1,5 +1,5 @@
 <?php 
-include('header.php');
+require_once('../include/header.php');
 
 $data = select('inventory');
 ?>
@@ -66,12 +66,12 @@ $data = select('inventory');
 							<nav class="navbar-sidebar">
 								<ul class="list-unstyled navbar">
 									<li>
-										<a href="index.php" class="btn btn-info">Inventory</a>
-										<a href="costing.php" class="btn btn-info">Production</a>
+										<a href="../index/" class="btn btn-info">Inventory</a>
+										<a href="../production/costing" class="btn btn-info">Production</a>
 
 										<?php if ($_SESSION['role'] == 'admin'): ?>
-										<a href="users.php" class="btn btn-info">Users</a>
-										<a href="logs.php" class="btn btn-info">Logs</a>
+										<a href="../users/users" class="btn btn-info">Users</a>
+										<a href="../logs/logs" class="btn btn-info">Logs</a>
 										<?php endif ?>
 									</li>
 								</ul>
@@ -85,7 +85,7 @@ $data = select('inventory');
 										<div class="account-dropdown js-dropdown">
 											<div class="account-dropdown__body">
 												<div class="account-dropdown__item">
-													<a href="logout.php">
+													<a href="../auth/logout.php">
 														<i class="zmdi zmdi-power"></i>Logout
 													</a>
 												</div>
@@ -116,7 +116,7 @@ $data = select('inventory');
 							<div class="modal-footer">
 								<button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
 								
-								<a href="delete.php?id=<?= $value['id']?>" class="btn btn-danger">Yes</a>
+								<a href="../stock/delete-inventory.php?id=<?= $value['id']?>" class="btn btn-danger">Yes</a>
 							</div>
 						</div>
 					</div>

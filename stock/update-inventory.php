@@ -1,6 +1,7 @@
 <?php 
 session_start();
-require_once"functions.php";
+require_once('../helper/functions.php');
+require_once('../config/conn.php');
 
 if(isset($_POST['update-stock'])){
 	$data = $_POST;
@@ -16,7 +17,7 @@ if(isset($_POST['update-stock'])){
 	`category` = '".$data['category']."',
 	`cargo` = '".$data['cargo']."'
 	WHERE `id` = '".$data['id']."' ";
-	
+
 	mysqli_query($conn, $update);
 
 	date_default_timezone_set("Asia/Calcutta");
@@ -30,7 +31,7 @@ if(isset($_POST['update-stock'])){
 
 	create('logs', $logs);
 	
-	header("location:index.php");
+	header("location: ../index/");
 }
 
 ?>

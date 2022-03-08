@@ -1,28 +1,26 @@
 <?php 
-include('list.php');
-require_once('conn.php');
-require_once('functions.php');
+require_once('../navbar/list.php');
+// require_once('conn.php');
+// require_once('functions.php');
 ?>
 
 <div class="card-header">
 	<h2>Production</h2>
 </div>
 <div class="card-body">
-	<form action="save-costing.php" method="post">
+	<form action="../production/save-production" method="post">
 		<div class="row">
 			<div class="form-group col-md-4">
 				<label><strong>Select number of raw material</strong></label>
 				<?php
-				global $conn;
-
-				$select="SELECT * FROM inventory";
-				$result=mysqli_query($conn,$select);	
+				$result = select('inventory');
 
 				$costing_data = [];
-				while ($row = mysqli_fetch_assoc($result)) {
+				foreach ($result as $key => $row) {
 					$costing_data[] = $row;
 				}
-				$costing_count = mysqli_num_rows($result);
+
+				$costing_count = count($result);
 				
 				?>
 				<select id="mat-number" class="form-control">
@@ -70,5 +68,5 @@ require_once('functions.php');
 </div>
 
 <?php 
-include('index-end.php');
+require_once('../include/index-end.php');
 ?>

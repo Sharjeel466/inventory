@@ -1,5 +1,5 @@
 <?php 
-include('list.php');
+require_once('../navbar/list.php');
 
 $where = ['id' => $_GET['id']];
 $row = select('inventory', $where);
@@ -10,7 +10,7 @@ $row = $row[0];
 	<h2>Update Stock</h2>
 </div>
 <div class="card-body">
-	<form action="edit_inventory.php" method="POST">
+	<form action="../stock/update-inventory" method="POST">
 		<div class="row">
 			<input type="hidden" name="id" value="<?= $row['id'] ?>">
 			<div class="form-group col-md-3">
@@ -62,5 +62,5 @@ $row = $row[0];
 </div>
 
 <?php 
-include('index-end.php');
+require_once('../include/index-end.php');
 ?>

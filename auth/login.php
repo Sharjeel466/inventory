@@ -1,10 +1,10 @@
 <?php
 session_start();
-require_once('conn.php');
-require_once('functions.php');
+require_once('../config/conn.php');
+require_once('../helper/functions.php');
 
 if (isset($_SESSION['user_name'])) {
-	header("location: index.php");
+	header("location: ../index/");
 	exit();
 }
 
@@ -14,7 +14,7 @@ if (isset($_POST['login'])) {
 
 	login('users', $email, $password);
 
-	header("location: ../inventory");
+	header("location: ../index/");
 }
 
 ?>
@@ -24,9 +24,9 @@ if (isset($_POST['login'])) {
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Inventory</title>
-	<link rel="stylesheet" href="assets/css/style.css">
-	<link rel="stylesheet" href="assets/css/fa/css/font-awesome.min.css">
-	<link rel="stylesheet" href="assets/css/bootstrap.css">
+	<link rel="stylesheet" href="../assets/css/style.css">
+	<link rel="stylesheet" href="../assets/css/fa/css/font-awesome.min.css">
+	<link rel="stylesheet" href="../assets/css/bootstrap.css">
 </head>
 <body>
 	<div class="wrapper">
@@ -45,7 +45,7 @@ if (isset($_POST['login'])) {
 			</form>
 		</div>
 	</div>
-	<script src="assets/js/script.js"></script>
-	<script src="assets/js/jquery-3.5.1.min.js"></script>
+	<script src="../assets/js/script.js"></script>
+	<script src="../assets/js/jquery-3.5.1.min.js"></script>
 </body>
 </html>

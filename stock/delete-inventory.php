@@ -1,6 +1,6 @@
 <?php 
 session_start();
-require_once('functions.php');
+require_once('../helper/functions.php');
 
 if (isset($_GET['id'])) {
 
@@ -18,7 +18,7 @@ if (isset($_GET['id'])) {
 
 	create('logs', $logs);
 
-	header('location:index.php');
+	header('location: ../index/');
 }
 
 ?>

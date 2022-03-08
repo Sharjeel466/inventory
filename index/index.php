@@ -1,14 +1,13 @@
-<?php include('list.php');
+<?php include('../navbar/list.php');
 
 $data = select('inventory');
-
 ?>
 
 <div class="card-header">
 	<h3>Inventory</h3>
 </div>
 <div class="card-body">
-	<a href="add-inventory.php" class="btn btn-primary">Add Inventory</a>
+	<a href="../stock/add-inventory" class="btn btn-primary">Add Inventory</a>
 </div>
 <div class="card-body">
 	<!-- <table class="table table-striped">
@@ -78,7 +77,7 @@ $data = select('inventory');
 					<div class="col" data-label="Amount/kg-"><?= $value['amount_per_kg'] ?></div>
 					<div class="col" data-label="Quality-"><?= $value['quality'] ?></div>
 					<div class="btn-group" role="group">
-						<a href="edit.php?id=<?php echo $value['id']?>" class="btn btn-sm btn-primary">Edit</a>
+						<a href="../stock/edit-inventory.php?id=<?php echo $value['id']?>" class="btn btn-sm btn-primary">Edit</a>
 						<button type="button" class="btn btn-sm btn-secondary" data-toggle="modal" data-target="#delete_stock-<?= $value['id'] ?>">
 							Delete
 						</button>
@@ -91,5 +90,5 @@ $data = select('inventory');
 </div>
 
 <?php 
-include('index-end.php');
+include('../include/index-end.php');
 ?>
