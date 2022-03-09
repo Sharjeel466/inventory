@@ -39,5 +39,4 @@ if(isset($_POST['update-user'])){
 	</script>
 	<?php 
 }
-
 ?>
