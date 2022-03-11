@@ -4,13 +4,14 @@ require_once('../config/conn.php');
 require_once('../helper/functions.php');
 
 if (isset($_POST['save-stock'])) {
-
+	
 	$product_id = $_POST['product_id'];
 	$user_qty = $_POST['user_qty'];
 	$total_product_qty = $_POST['total_product_qty'];
 	$required_qty = $_POST['required_qty'];
 	$total_per_kg = $_POST['total_per_kg'];
 	$total = $_POST['total'];
+	$shake_name = $_POST['shake_name'];
 
 	$data = [
 		'time' => date("F d, Y h:i:s A"),
@@ -19,13 +20,14 @@ if (isset($_POST['save-stock'])) {
 		'total_product_qty' => $total_product_qty,
 		'required_qty' => $required_qty,
 		'total_per_kg' => $total_per_kg,
+		'shake_name' => $shake_name,
 		'total' => $total
 	];
 
 	for ($i=0; $i < count($data['product_id']); $i++) { 
 
 		$insert = 'INSERT INTO `costing` (
-			`time`, `product_id`, `user_qty`, `required_qty`, `total_per_kg`, `total`, `total_product_qty`) 
+			`time`, `product_id`, `user_qty`, `required_qty`, `total_per_kg`, `total`, `total_product_qty`, `shake_name`) 
 		VALUES (
 			"'.$data['time'].'",
 			"'.$data['product_id'][$i].'",
@@ -33,10 +35,11 @@ if (isset($_POST['save-stock'])) {
 			"'.$data['required_qty'].'",
 			"'.$data['total_per_kg'].'",
 			"'.$data['total'].'",
-			"'.$data['total_product_qty'][$i].'"
+			"'.$data['total_product_qty'][$i].'",
+			"'.$data['shake_name'].'"
 		)';
 
-		$result=mysqli_query($conn,$insert);
+		$result = mysqli_query($conn, $insert);
 		
 	}
 

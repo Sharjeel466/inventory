@@ -61,7 +61,7 @@ if (isset($_POST['save-stock'])) {
 			</div>
 			<div class="form-group col-md-3">
 				<label>Total Quantity (kg)</label>
-				<input type="text" onkeypress="return IsNumeric(event);" id="product_qty" class="form-control" name="qty" placeholder="Product Quantity">
+				<input type="text" onkeypress="return IsNumeric(event);" id="product_qty" required class="form-control" name="qty" placeholder="Product Quantity">
 			</div>
 			<div class="form-group col-md-3">
 				<label>Shortage (%)</label>
@@ -85,8 +85,8 @@ if (isset($_POST['save-stock'])) {
 			</div>
 			<div class="form-group col-md-3">
 				<label>Quality</label>
-				<select class="form-control" name="quality">
-					<option value="0">---Select Quality---</option>
+				<select class="form-control" name="quality" required>
+					<option value="">---Select Quality---</option>
 					<?php for ($i=1; $i < 11; $i++) { ?>
 						<option value="<?= $i ?>"><?= $i ?></option>
 					<?php } ?>

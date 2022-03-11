@@ -1,7 +1,7 @@
 <?php 
 require_once('../navbar/list.php');
 
-if ($_SESSION['role'] != 'admin') {
+if ($_SESSION['role'] != 'admin' || $_SESSION['role'] != 'sub_admin') {
 	?>
 	<script>
 		window.location.href = '../index/';

@@ -1,5 +1,42 @@
 // ***********************************************
 
+$('#production').click(function() {
+
+  $('.modal-body .row .col-md-4 #model_arr').html('');
+  $('.modal-body .row .col-md-4 #model_stock').html('');
+
+  var model_ind = 0;
+  var model_attr = 1;
+  var model_arr = [];
+
+  $('.inventory').each(function() {
+    model_arr[model_ind++] = $('.model_data_'+model_attr++).find('option:selected').text();
+  });
+
+  var model_arr_html = '';
+  $.each(model_arr, function(index, val) {
+    model_arr_html += '<div>'+val+'</div>';
+  });
+  $('#model_arr').append(model_arr_html);
+
+  var stock_ind = 0;
+  var stock_attr = 1;
+  var stock_arr = [];
+
+  $('.hidden_model_data').each(function() {
+    stock_arr[stock_ind++] = $('.product-required-'+stock_attr++).val();
+  });
+
+  var stock_arr_html = '';
+  $.each(stock_arr, function(index, val) {
+    stock_arr_html += '<div>'+val+'</div>';
+  });
+  $('#model_stock').append(stock_arr_html);
+
+});
+
+// ***********************************************
+
 $(document).on('change paste keyup', function() {
   var product_qty = $('#product_qty').val();
   var shortage = $('#shortage').val();
@@ -7,11 +44,11 @@ $(document).on('change paste keyup', function() {
   var total_qty = $('#total_qty').val();
   var cargo = $('#cargo').val();
 
-  var amount = (parseInt(cargo) + parseInt(amount_paid)) / parseInt(total_qty);
+  var amount = (parseFloat(cargo) + parseFloat(amount_paid)) / parseFloat(total_qty);
 
-  var percentage = ((product_qty * shortage) / 100);
+  var percentage = ((parseFloat(product_qty) * parseFloat(shortage)) / 100);
   var val = product_qty - percentage;
-  $('#total_qty').val(val);
+  $('#total_qty').val(val.toFixed(2));
 
   $('#amount_per_kg').val(amount.toFixed(2));
 
@@ -101,7 +138,7 @@ $(document).ready(function() {
 
               for (var i = 1; i <= a.length; i++) {
                 var find_stock = require_divided * $('.product_qty-'+i).val();
-                $('.product-required-'+i).val(find_stock);
+                $('.product-required-'+i).val(find_stock.toFixed(2));
               }
 
               z = 0;

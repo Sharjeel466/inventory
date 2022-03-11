@@ -13,8 +13,8 @@
 		<ul class="responsive-table">
 			<li class="table-header">
 				<div class="col col-1" data-label="#">#</div>
-				<div class="col">Product Name</div>
-				<div class="col">Product Category</div>
+				<div class="col">Product(Category)</div>
+				<div class="col">Mixture Name</div>
 				<div class="col">User Quantity</div>
 				<div class="col">Required Quantity</div>
 				<div class="col">Total/kg</div>
@@ -28,8 +28,8 @@
 			foreach ($select as $key => $f) {?>
 				<li class="table-row">
 					<div class="col col-1" data-label="#"><?= $n++ ?></div>
-					<div class="col" data-label="Name-"><?= $f['product_name'] ?></div>
-					<div class="col" data-label="Category-"><?= $f['category'] ?></div>
+					<div class="col" data-label="Name-"><?= $f['product_name'] ?>(<?= $f['category'] ?>)</div>
+					<div class="col" data-label="Category-"><?= $f['shake_name'] ?></div>
 					<div class="col" data-label="Category-"><?= $f['user_qty'] ?></div>
 					<div class="col" data-label="Total Qty-"><?= $f['required_qty'] ?></div>
 					<div class="col" data-label="Total Qty-"><?= $f['total_per_kg'] ?></div>

@@ -1,7 +1,7 @@
 <?php 
 require_once('../navbar/list.php');
 
-if ($_SESSION['role'] != 'admin') {
+if ($_SESSION['role'] != 'admin' || $_SESSION['role'] != 'sub_admin') {
 	?>
 	<script>
 		window.location.href = '../index/';
@@ -16,6 +16,7 @@ if (isset($_POST['save-user'])) {
 	$password = $_POST['password'];
 	$mobile_number = $_POST['mobile_number'];
 	$address = $_POST['address'];
+	$role = $_POST['role'];
 
 	$data = [
 		'name' => $user_name,
@@ -23,7 +24,7 @@ if (isset($_POST['save-user'])) {
 		'password' => md5($password),
 		'mobile_number' => $mobile_number,
 		'address' => $address,
-		'role' => 'employee',
+		'role' => $role,
 	];	
 
 	create('users', $data);
@@ -74,6 +75,14 @@ if (isset($_POST['save-user'])) {
 			<div class="form-group col-md-3">
 				<label>Address</label>
 				<input type="text" class="form-control" name="address" placeholder="Address">
+			</div>
+			<div class="form-group col-md-3">
+				<label>Role</label>
+				<select class="form-control" required name="role">
+					<option value="">---Select Role---</option>
+					<option value="sub_admin">Sub Admin</option>
+					<option value="employee">Employee</option>
+				</select>
 			</div>
 		</div>
 		<div class="form-group">

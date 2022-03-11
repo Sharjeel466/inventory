@@ -22,7 +22,7 @@ function ajax_select($t){
 		<div class="row">
 			<div class="form-group col-md-6">
 				<label>Product-<?= $x ?></label>
-				<select class="form-control inventory" data-id='<?= $x ?>' name="product_id[]">
+				<select class="form-control inventory model_data_<?= $x ?>" data-id='<?= $x ?>' name="product_id[]">
 					<option value="">Select Product</option>
 					<?php 
 
@@ -38,7 +38,7 @@ function ajax_select($t){
 				<input type="text" onkeypress="return IsNumeric(event);" name="user_qty[]" maxlength="" product_id="" required class="form-control t_qty product_qty-<?= $x ?>" placeholder="Required Qty" autocomplete="off">
 				
 				<input type="hidden" id="hidden-product_qty-<?= $x ?>" class="hidden_data">
-				<input type="hidden" name="total_product_qty[]" class="product-required-<?= $x ?>">
+				<input type="hidden" name="total_product_qty[]" class="hidden_model_data product-required-<?= $x ?>">
 			</div>
 		</div>
 

@@ -11,7 +11,10 @@ require_once('../navbar/list.php');
 	<form action="../production/save-production" method="post">
 		<div class="row">
 			<div class="form-group col-md-4">
-				<label><strong>Select number of raw material</strong></label>
+				<label><strong>Write Product Name</strong></label>
+				<input type="text" class="form-control" required name="shake_name" placeholder="Mixture Name">
+
+				<label class="mt-3"><strong>Select number of raw material</strong></label>
 				<?php
 				$result = select('inventory');
 
@@ -34,6 +37,7 @@ require_once('../navbar/list.php');
 					?>
 				</select>
 			</div>
+
 			<div class="form-group col-md-8" id="products-show-wrapper">
 
 			</div>
@@ -62,11 +66,41 @@ require_once('../navbar/list.php');
 		</div>
 		<hr>
 		<div class="form-group">
+			<button type="button" data-toggle="modal" data-target="#production_confirm" id="production" class="btn btn-secondary">Check</button>
 			<button type="submit" name="save-stock" class="btn btn-primary">Submit</button>
 		</div>
 	</form>
 </div>
 
+
 <?php 
 require_once('../include/index-end.php');
 ?>
+<!-- Modal -->
+<div class="modal fade" id="production_confirm" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">Confirmation</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<div class="row">
+					<div class="col-md-4">
+						<strong>Product</strong>
+						<div id="model_arr"></div>
+					</div>
+					<div class="col-md-4">
+						<strong>Total Stock</strong>
+						<div id="model_stock"></div>
+					</div>
+				</div> 
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+			</div>
+		</div>
+	</div>
+</div>

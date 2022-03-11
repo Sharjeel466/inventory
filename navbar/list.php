@@ -24,20 +24,20 @@ $data = select('inventory');
 				<ul class="navbar-mobile__list list-unstyled">
 					<li>
 						<!-- <a href="index.php"><h4>Inventory</h4></a>
-						<a href="costing.php"><h4>Costing</h4></a> -->
-					</li>
-				</ul>
-			</div>
-		</nav>
-	</header>
-	<!-- END HEADER MOBILE-->
+							<a href="costing.php"><h4>Costing</h4></a> -->
+						</li>
+					</ul>
+				</div>
+			</nav>
+		</header>
+		<!-- END HEADER MOBILE-->
 
-	<!-- MENU SIDEBAR-->
-	<aside class="menu-sidebar d-none d-lg-block">
-		<div class="logo">
-			<h3>Inventory</h3>
-		</div>
-		<!-- <div class="menu-sidebar__content js-scrollbar1"> -->
+		<!-- MENU SIDEBAR-->
+		<aside class="menu-sidebar d-none d-lg-block">
+			<div class="logo">
+				<h3>Inventory</h3>
+			</div>
+			<!-- <div class="menu-sidebar__content js-scrollbar1"> -->
 			<!-- <nav class="navbar-sidebar">
 				<ul class="list-unstyled navbar__list">
 					<li>
@@ -69,9 +69,11 @@ $data = select('inventory');
 										<a href="../index/" class="btn btn-info">Inventory</a>
 										<a href="../production/costing" class="btn btn-info">Production</a>
 
-										<?php if ($_SESSION['role'] == 'admin'): ?>
-										<a href="../users/users" class="btn btn-info">Users</a>
-										<a href="../logs/logs" class="btn btn-info">Logs</a>
+										<?php if ($_SESSION['role'] == 'admin' || $_SESSION['role'] == 'sub_admin'): ?>
+											<a href="../users/users" class="btn btn-info">Users</a>
+											<?php if ($_SESSION['role'] == 'admin'): ?>
+												<a href="../logs/logs" class="btn btn-info">Logs</a>
+											<?php endif ?>
 										<?php endif ?>
 									</li>
 								</ul>
