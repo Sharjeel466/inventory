@@ -1,7 +1,7 @@
 <?php 
 require_once('../navbar/list.php');
 
-if ($_SESSION['role'] != 'admin' || $_SESSION['role'] != 'sub_admin') {
+if ($_SESSION['role'] == 'employee') {
 	?>
 	<script>
 		window.location.href = '../index/';
@@ -9,8 +9,13 @@ if ($_SESSION['role'] != 'admin' || $_SESSION['role'] != 'sub_admin') {
 	<?php 
 }
 
+if ($_SESSION['role'] == 'admin') {
+	$select = 'SELECT * FROM `users` WHERE `role` != "admin"';
+}
+elseif($_SESSION['role'] == 'sub_admin'){
+	$select = 'SELECT * FROM `users` WHERE `role` = "employee"';
+}
 
-$select = 'SELECT * FROM `users` WHERE `role` != "admin"';
 $result = mysqli_query($conn,$select);
 
 ?>
@@ -30,6 +35,7 @@ $result = mysqli_query($conn,$select);
 				<div class="col">Email</div>
 				<div class="col">Mobile</div>
 				<div class="col">Address</div>
+				<div class="col">Role</div>
 				<div class="col" colspan="2">Action</div>
 			</li>
 			<?php $n =1;?>
@@ -40,6 +46,7 @@ $result = mysqli_query($conn,$select);
 					<div class="col" data-label="Category-"><?= $value['email'] ?></div>
 					<div class="col" data-label="Qty after Shortage-"><?= $value['mobile_number'] ?></div>
 					<div class="col" data-label="Shortage-"><?= $value['address'] ?></div>
+					<div class="col" data-label="Shortage-"><?= $value['role'] ?></div>
 					<div class="col">
 						<a href="../users/user-edit?id=<?php echo $value['id']?>" class="btn btn-sm btn-primary">Edit</a>
 					</div>

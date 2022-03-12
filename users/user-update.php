@@ -1,7 +1,7 @@
 <?php
 require_once('../navbar/list.php');
 
-if ($_SESSION['role'] != 'admin' || $_SESSION['role'] != 'sub_admin') {
+if ($_SESSION['role'] == 'employee') {
 	?>
 	<script>
 		window.location.href = '../index/';
@@ -13,7 +13,6 @@ require_once('../helper/functions.php');
 
 if(isset($_POST['update-user'])){
 	$data = $_POST;
-
 	$password = md5($_POST['password']);
 
 	$update = "UPDATE `users` SET 
@@ -21,7 +20,7 @@ if(isset($_POST['update-user'])){
 	`email` = '".$data['email']."',
 	`password` = '".$password."',
 	`mobile_number` = '".$data['mobile_number']."',
-	`address` = '".$data['address']."'
+	`address` = '".$data['address']."',
 	`role` = '".$data['role']."'
 	WHERE `id` = '".$data['id']."' ";
 	

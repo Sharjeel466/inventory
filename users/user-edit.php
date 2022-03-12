@@ -1,7 +1,7 @@
 <?php 
 require_once('../navbar/list.php');
 
-if ($_SESSION['role'] != 'admin' || $_SESSION['role'] != 'sub_admin') {
+if ($_SESSION['role'] == 'employee') {
 	?>
 	<script>
 		window.location.href = '../index/';
@@ -40,18 +40,24 @@ $row = $row[0];
 				<label>Address</label>
 				<input type="text" class="form-control" value="<?= $row['address'] ?>" name="address" placeholder="Address">
 			</div>
-			<div class="form-group col-md-3">
-				<label>Role</label>
-				<select class="form-control" name="role">
-					<?php if ($row['role'] == 'sub_admin'){ ?>
-						<option value="sub_admin" selected>Sub Admin</option>
-						<option value="employee">Employee</option>
-					<?php }else{ ?>
-						<option value="employee" selected>Employee</option>
-						<option value="sub_admin">Sub Admin</option>
-					<?php } ?>
-				</select>
-			</div>
+
+			<?php if ($_SESSION['role'] == 'admin'){ ?>
+				<div class="form-group col-md-3">
+					<label>Role</label>
+					<select class="form-control" name="role">
+						<?php if ($row['role'] == 'sub_admin'){ ?>
+							<option value="sub_admin" selected>Sub Admin</option>
+							<option value="employee">Employee</option>
+						<?php }else{ ?>
+							<option value="employee" selected>Employee</option>
+							<option value="sub_admin">Sub Admin</option>
+						<?php } ?>
+					</select>
+				</div>
+			<?php } else { ?>
+				<input type="hidden" name="role" value="<?= $row['role'] ?>">
+			<?php } ?>
+
 		</div>
 		<div class="form-group">
 			<button type="submit" value="true" name="update-user" class="btn btn-primary">Submit</button>

@@ -69,12 +69,12 @@ $data = select('inventory');
 										<a href="../index/" class="btn btn-info">Inventory</a>
 										<a href="../production/costing" class="btn btn-info">Production</a>
 
-										<?php if ($_SESSION['role'] == 'admin' || $_SESSION['role'] == 'sub_admin'): ?>
+										<?php if ($_SESSION['role'] == 'employee'){ ?>
+											
+										<?php } else{ ?>
 											<a href="../users/users" class="btn btn-info">Users</a>
-											<?php if ($_SESSION['role'] == 'admin'): ?>
-												<a href="../logs/logs" class="btn btn-info">Logs</a>
-											<?php endif ?>
-										<?php endif ?>
+											<a href="../logs/logs" class="btn btn-info">Logs</a>
+										<?php	} ?>
 									</li>
 								</ul>
 							</nav>
@@ -82,7 +82,7 @@ $data = select('inventory');
 								<div class="account-wrap">
 									<div class="account-item clearfix js-item-menu">
 										<div class="content">
-											Hi, <a class="js-acc-btn"><strong><?= $_SESSION['user_name'] ?></strong></a>
+											Hi, <a class="js-acc-btn"><strong><?= $_SESSION['user_name'] ?> ( <?= $_SESSION['role'] ?> )</strong></a>
 										</div>
 										<div class="account-dropdown js-dropdown">
 											<div class="account-dropdown__body">

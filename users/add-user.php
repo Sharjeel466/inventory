@@ -1,7 +1,7 @@
 <?php 
 require_once('../navbar/list.php');
 
-if ($_SESSION['role'] != 'admin' || $_SESSION['role'] != 'sub_admin') {
+if ($_SESSION['role'] == 'employee') {
 	?>
 	<script>
 		window.location.href = '../index/';
@@ -76,14 +76,19 @@ if (isset($_POST['save-user'])) {
 				<label>Address</label>
 				<input type="text" class="form-control" name="address" placeholder="Address">
 			</div>
-			<div class="form-group col-md-3">
-				<label>Role</label>
-				<select class="form-control" required name="role">
-					<option value="">---Select Role---</option>
-					<option value="sub_admin">Sub Admin</option>
-					<option value="employee">Employee</option>
-				</select>
-			</div>
+
+			<?php if ($_SESSION['role'] == 'admin'){ ?>
+				<div class="form-group col-md-3">
+					<label>Role</label>
+					<select class="form-control" required name="role">
+						<option value="">---Select Role---</option>
+						<option value="sub_admin">Sub Admin</option>
+						<option value="employee">Employee</option>
+					</select>
+				</div>
+			<?php } else { ?>
+				<input type="hidden" name="role" value="employee">
+			<?php } ?>
 		</div>
 		<div class="form-group">
 			<button type="submit" name="save-user" class="btn btn-primary">Submit</button>

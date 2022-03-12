@@ -96,6 +96,13 @@ require_once('../include/index-end.php');
 						<strong>Total Stock</strong>
 						<div id="model_stock"></div>
 					</div>
+
+					<?php if ($_SESSION['role'] != 'employee'){ ?>
+						<div class="col-md-4">
+							<strong>Total Price</strong>
+							<div id="model_price"></div>
+						</div>
+					<?php }?>
 				</div> 
 			</div>
 			<div class="modal-footer">

@@ -24,7 +24,7 @@ function login($table,$email,$password){
 				$_SESSION['user_name'] = $row['name'];
 				$_SESSION['user_id'] = $row['id'];
 				$_SESSION['role'] = $row['role'];
-				
+
 			}
 
 		}

@@ -4,6 +4,7 @@ $('#production').click(function() {
 
   $('.modal-body .row .col-md-4 #model_arr').html('');
   $('.modal-body .row .col-md-4 #model_stock').html('');
+  $('.modal-body .row .col-md-4 #model_price').html('');
 
   var model_ind = 0;
   var model_attr = 1;
@@ -32,6 +33,28 @@ $('#production').click(function() {
     stock_arr_html += '<div>'+val+'</div>';
   });
   $('#model_stock').append(stock_arr_html);
+
+
+  var model_product_number = 1;
+  var model_product_ind = 0;
+  var model_product_arr = [];
+  $('.inventory').each(function() {
+    model_product_arr[model_product_ind++] = $('.model_data_'+model_product_number++).find('option:selected').attr('price');
+  });
+
+
+  var price_arr = [];
+
+  for (var i = 0; i < stock_arr.length; i++) {
+    price_arr[i] = stock_arr[i] * model_product_arr[i];
+    price_arr[i] = price_arr[i].toFixed(2);
+  }
+
+  var price_arr_html = '';
+  $.each(price_arr, function(index, val) {
+    price_arr_html += '<div>'+val+'</div>';
+  });
+  $('#model_price').append(price_arr_html);
 
 });
 
