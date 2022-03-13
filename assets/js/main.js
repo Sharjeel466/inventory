@@ -42,7 +42,6 @@ $('#production').click(function() {
     model_product_arr[model_product_ind++] = $('.model_data_'+model_product_number++).find('option:selected').attr('price');
   });
 
-
   var price_arr = [];
 
   for (var i = 0; i < stock_arr.length; i++) {
@@ -83,6 +82,7 @@ $(document).ready(function() {
 
   $('#mat-number').change(function(){
     var mat_number = $(this).val();
+    $('input').val('');
 
     $.ajax({
       url: 'db-stock.php',
@@ -113,6 +113,7 @@ $(document).ready(function() {
           $(document).on('keyup', '.product_qty-'+data_id, function() {
             var prod_qty = $(this).val();
             var x = t_price * prod_qty;
+            
             $('#hidden-product_qty-'+data_id).val(x.toFixed(2));
 
             var t = 0;
@@ -129,22 +130,32 @@ $(document).ready(function() {
             var quantity = $('#total-qty').val();
             
             $('#total').val((t.toFixed(2) / quantity).toFixed(2));
-
             // var total_per_kg = $('#total').val();
             // required_qty * total_per_kg; 
 
-            var total_quantity = $('#total-qty').val();
+            // var total_quantity = $('#total-qty').val();
 
             $(document).on('keyup', '#required-qty', function() {
               var required_qty = $(this).val();
-
               var total_per_kg = $('#total').val();
               var all_total = required_qty * total_per_kg; 
+              var total_quantity = $('#total-qty').val();
 
-              // $('.product_required-'+data_id).val();
+              var total_sub_data = [];
+              var total_sub_data_i = 0;
+              for (var i = 1; i <= $('.hidden_model_data').length; i++) {
+                total_sub_data[total_sub_data_i++] = $('.product-required-'+i).val() * $('.model_data_'+i).find('option:selected').attr('price');
+              }
+
+              var total_sub_data_sum = 0;
+              $.each(total_sub_data, function(index, val) {
+                total_sub_data_sum += val;
+              });
               // $('.product-required-'+data_id).val(x.toFixed(2));
 
-              $('#all_total').val(all_total.toFixed(2));
+              $('#all_total').val(total_sub_data_sum.toFixed(2));
+
+              $('#total').val(($('#all_total').val() / required_qty).toFixed(3));
 
               var total_divide = required_qty/total_quantity;
               var require_divided = total_divide.toFixed(2);
