@@ -78,6 +78,7 @@ $data = select('inventory');
 					<div class="col" data-label="Quality-"><?= $value['quality'] ?></div>
 					<div class="btn-group" role="group">
 						<a href="../stock/edit-inventory.php?id=<?php echo $value['id']?>" class="btn btn-sm btn-primary">Edit</a>
+						<a href="../stock/update-stock.php?id=<?php echo $value['id']?>" class="btn btn-sm btn-success">Update</a>
 						<button type="button" class="btn btn-sm btn-secondary" data-toggle="modal" data-target="#delete_stock-<?= $value['id'] ?>">
 							Delete
 						</button>

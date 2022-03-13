@@ -113,7 +113,7 @@ $data = select('inventory');
 								</button>
 							</div>
 							<div class="modal-body">
-								Are you sure to delete <strong><?= $value['product_name'] ?> (<?= $value['category'] ?>)</strong>?
+								Are you sure to delete <strong><?= $value['product_name'] ?></strong>?
 							</div>
 							<div class="modal-footer">
 								<button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>

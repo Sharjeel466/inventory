@@ -7,22 +7,23 @@ $row = $row[0];
 
 ?>
 <div class="card-header">
-	<h2>Edit Stock</h2>
+	<h2>Update Stock</h2>
 </div>
 <div class="card-body">
-	<form action="../stock/update-inventory" method="POST">
+	<form action="../stock/stock-update" method="POST">
 		<div class="row">
 			<input type="hidden" name="id" value="<?= $row['id'] ?>">
 			<div class="form-group col-md-3">
 				<label>Name</label>
-				<input type="text" required class="form-control" value="<?= $row['product_name'] ?>" name="name" placeholder="Product Name">
+				<input type="text" required readonly class="form-control" value="<?= $row['product_name'] ?>" name="name" placeholder="Product Name">
 			</div>
 			<div class="form-group col-md-3">
 				<label>Category</label>
-				<input type="text" required class="form-control" value="<?= $row['category'] ?>" name="category" placeholder="Category">
+				<input type="text" required readonly class="form-control" value="<?= $row['category'] ?>" name="category" placeholder="Category">
 			</div>
 			<div class="form-group col-md-3">
 				<label>Total Quantity (kg)</label>
+				<input type="hidden" name="previous_stock" value="<?= $row['product_qty'] ?>">
 				<input type="text" onkeypress="return IsNumeric(event);" value="<?= $row['product_qty'] ?>" id="product_qty" class="form-control" name="qty" placeholder="Product Quantity">
 			</div>
 			<div class="form-group col-md-3">
@@ -30,10 +31,12 @@ $row = $row[0];
 				<input type="text" class="form-control" id="shortage" name="shortage" value="<?= $row['shortage'] ?>" placeholder="Product Shortage">
 			</div>
 			<div class="form-group col-md-3">
+				<input type="hidden" name="previous_qty" value="<?= $row['total_qty'] ?>">
 				<label>Quantity after Shortage</label>
 				<input type="text" class="form-control" id="total_qty" readonly value="<?= $row['total_qty'] ?>" name="total_qty" placeholder="Total Quantity">
 			</div>
 			<div class="form-group col-md-3">
+				<input type="hidden" name="previous_amount_paid" value="<?= $row['total_amount_paid'] ?>">
 				<label>Total Amount Paid</label>	
 				<input type="text" id="amount_paid" onkeypress="return IsNumeric(event);" value="<?= $row['total_amount_paid'] ?>" class="form-control" name="total_amount" placeholder="Paid Amount">
 			</div>
@@ -56,7 +59,7 @@ $row = $row[0];
 			</div>
 		</div>
 		<div class="form-group">
-			<button type="submit" value="true" name="update-inventory" class="btn btn-primary">Submit</button>
+			<button type="submit" value="true" name="update-stock" class="btn btn-primary">Submit</button>
 		</div>
 	</form>
 </div>
