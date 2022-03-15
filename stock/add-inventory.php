@@ -11,6 +11,13 @@ if (isset($_POST['save-stock'])) {
 	$quality = $_POST['quality'];
 	$category = $_POST['category'];
 	$cargo = $_POST['cargo'];
+	
+	if ($_POST['total_qty'] == 'NaN') {
+		$total_qty = '';
+	}
+	if ($_POST['amount_per_kg'] == 'NaN') {
+		$amount_per_kg = '';
+	}
 
 	$data = [
 		'product_name' => $name,

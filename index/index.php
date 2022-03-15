@@ -70,11 +70,17 @@ $data = select('inventory');
 					<div class="col" data-label="Name-"><?= $value['product_name'] ?></div>
 					<div class="col" data-label="Category-"><?= $value['category'] ?></div>
 					<div class="col" data-label="Total Qty-"><?= $value['product_qty'] ?></div>
-					<div class="col" data-label="Qty after Shortage-"><?= $value['total_qty'] ?></div>
-					<div class="col" data-label="Shortage-"><?= $value['shortage'] ?></div>
-					<div class="col" data-label="Total Amount Paid-"><?= $value['total_amount_paid'] ?></div>
-					<div class="col" data-label="Amount/kg-"><?= $value['cargo'] ?></div>
-					<div class="col" data-label="Amount/kg-"><?= $value['amount_per_kg'] ?></div>
+
+					<div class="col <?php if ($value['total_qty'] == ''): ?> bg-danger <?php endif ?>" data-label="Qty after Shortage-"><?= $value['total_qty'] ?></div>
+
+					<div class="col <?php if ($value['shortage'] == ''): ?> bg-danger <?php endif ?>" data-label="Shortage-"><?= $value['shortage'] ?></div>
+
+					<div class="col <?php if ($value['total_amount_paid'] == ''): ?> bg-danger <?php endif ?>" data-label="Total Amount Paid-"><?= $value['total_amount_paid'] ?></div>
+
+					<div class="col <?php if ($value['cargo'] == ''): ?> bg-danger <?php endif ?>" data-label="Amount/kg-"><?= $value['cargo'] ?></div>
+
+					<div class="col <?php if ($value['amount_per_kg'] == ''): ?> bg-danger <?php endif ?>" data-label="Amount/kg-"><?= $value['amount_per_kg'] ?></div>
+					
 					<div class="col" data-label="Quality-"><?= $value['quality'] ?></div>
 					<div class="btn-group" role="group">
 						<a href="../stock/edit-inventory.php?id=<?php echo $value['id']?>" class="btn btn-sm btn-primary">Edit</a>
