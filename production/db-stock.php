@@ -22,6 +22,7 @@ function ajax_select($t){
 		<div class="row">
 			<div class="form-group col-md-6">
 				<label>Product-<?= $x ?></label>
+				<input type="hidden" name="product_name[]" class="production_product_name-<?= $x ?>">
 				<select class="form-control inventory model_data_<?= $x ?>" data-id='<?= $x ?>' name="product_id[]">
 					<option value="">Select Product</option>
 					<?php 

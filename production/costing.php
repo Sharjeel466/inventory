@@ -13,29 +13,30 @@
 		<ul class="responsive-table">
 			<li class="table-header">
 				<div class="col col-1" data-label="#">#</div>
-				<div class="col">Product(Category)</div>
-				<div class="col">Mixture Name</div>
-				<div class="col">User Quantity</div>
+				<div class="col">Shake Name</div>
 				<div class="col">Required Quantity</div>
 				<div class="col">Total/kg</div>
 				<div class="col">Total</div>
-				<div class="col">Time</div>
-				<div class="col">Total Amount</div>
+				<div class="col">Action</div>
 			</li>
 			<?php $n =1;
-			$select = leftJoin('costing', 'inventory', 'product_id', 'id', 'costing', 'id');
+
+			$select="SELECT * FROM `costing` ORDER BY `ID` DESC";
+
+			$result=mysqli_query($conn,$select);
+			$data=[];
+			while ($row=mysqli_fetch_assoc($result)) {
+				$data[]=$row;
+			}
 			
-			foreach ($select as $key => $f) {?>
+			foreach ($data as $key => $f) {?>
 				<li class="table-row">
 					<div class="col col-1" data-label="#"><?= $n++ ?></div>
-					<div class="col" data-label="Name-"><?= $f['product_name'] ?>(<?= $f['category'] ?>)</div>
-					<div class="col" data-label="Category-"><?= $f['shake_name'] ?></div>
-					<div class="col" data-label="Category-"><?= $f['user_qty'] ?></div>
-					<div class="col" data-label="Total Qty-"><?= $f['required_qty'] ?></div>
-					<div class="col" data-label="Total Qty-"><?= $f['total_per_kg'] ?></div>
+					<div class="col" data-label="Name-"><?= $f['shake_name'] ?></div>
+					<div class="col" data-label="Category-"><?= $f['required_qty'] ?></div>
+					<div class="col" data-label="Category-"><?= $f['total_per_kg'] ?></div>
 					<div class="col" data-label="Total Qty-"><?= $f['total'] ?></div>
-					<div class="col" data-label="Total Qty-"><?= $f['time'] ?></div>
-					<div class="col" data-label="Total Qty-"><?= $f['total_product_qty'] ?></div>
+					<div class="col btn btn-success" data-label="Total Qty-" onclick="costing(<?= $f['id'] ?>, '<?= $f['shake_name'] ?>')">Details</div>
 				</li> 
 				<?php 
 			}

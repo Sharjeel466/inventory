@@ -1,4 +1,47 @@
 // ***********************************************
+function costing($id, $shake){
+
+  var id = $id;
+  var shake = $shake;
+
+  $.ajax({
+    url: 'costing-data-get.php',
+    data: {id: id},
+    success: function(data){
+      var value = JSON.parse(data);
+
+      $('#shake').html('');
+      $('#product_name').html('');
+      $('#user_qty').html('');
+      $('#product_qty').html('');
+      var product_name = '';
+      $.each(value, function(index, val) {
+        product_name += '<div class="col-md-3">'+val.product_name+'</div>';
+      }); 
+
+      var user_qty = '';
+      $.each(value, function(index, val) {
+        user_qty += '<div class="col-md-3">'+val.user_qty+'</div>';
+      }); 
+
+      var product_qty = '';
+      $.each(value, function(index, val) {
+        product_qty += '<div class="col-md-3">'+val.total_product_qty+'</div>';
+      }); 
+
+      $('#shake').text(shake);
+      $('#product_name').append(product_name);
+      $('#user_qty').append(user_qty);
+      $('#product_qty').append(product_qty);
+      $('#costing-data').modal('show');
+
+    }
+  });
+
+
+}
+
+// ***********************************************
 
 $('#production').click(function() {
 
@@ -60,7 +103,7 @@ $('#production').click(function() {
 // ***********************************************
 
 $(document).on('change paste keyup', function() {
-  var product_qty = $('#product_qty').val();
+  var product_qty = $('.add_product_qty').val();
   var shortage = $('#shortage').val();
   var amount_paid = $('#amount_paid').val();
   var total_qty = $('#total_qty').val();
@@ -71,7 +114,6 @@ $(document).on('change paste keyup', function() {
   var percentage = ((parseFloat(product_qty) * parseFloat(shortage)) / 100);
   var val = product_qty - percentage;
   $('#total_qty').val(val.toFixed(2));
-
   $('#amount_per_kg').val(amount.toFixed(2));
 
 });
@@ -94,11 +136,12 @@ $(document).ready(function() {
         $(document).on('change', '.inventory', function(){
           var selected = $(this).val();
           var qty = $(this).find('option:selected').attr('qty');
-          // var text = $(this).find('option:selected').text();
+          var text = $(this).find('option:selected').text();
           var data_id = $(this).data('id');
           var qty_length = $('.product_qty-'+data_id).attr('maxlength', qty.length);
           var t_price = $(this).find('option:selected').attr('price');
 
+          $('.production_product_name-'+data_id).val(text);
           $('.product_qty-'+data_id).attr('product_id', selected);
           $('.prod_id-'+data_id).text(qty);
           $('.product_qty-'+data_id).val(qty);

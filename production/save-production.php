@@ -6,6 +6,7 @@ require_once('../helper/functions.php');
 if (isset($_POST['save-stock'])) {
 	
 	$product_id = $_POST['product_id'];
+	$product_name = $_POST['product_name'];
 	$user_qty = $_POST['user_qty'];
 	$total_product_qty = $_POST['total_product_qty'];
 	$required_qty = $_POST['required_qty'];
@@ -13,30 +14,31 @@ if (isset($_POST['save-stock'])) {
 	$total = $_POST['total'];
 	$shake_name = $_POST['shake_name'];
 
-	$data = [
+	$costing_data = [
 		'time' => date("F d, Y h:i:s A"),
-		'product_id' => $product_id,
-		'user_qty' => $user_qty,
-		'total_product_qty' => $total_product_qty,
+
+		// 'product_id' => $product_id,
+		// 'user_qty' => $user_qty,
+		// 'total_product_qty' => $total_product_qty,
+
 		'required_qty' => $required_qty,
 		'total_per_kg' => $total_per_kg,
 		'shake_name' => $shake_name,
 		'total' => $total
 	];
 
-	for ($i=0; $i < count($data['product_id']); $i++) { 
+	create('costing', $costing_data);
+	$last_id = mysqli_insert_id($conn);
 
-		$insert = 'INSERT INTO `costing` (
-			`time`, `product_id`, `user_qty`, `required_qty`, `total_per_kg`, `total`, `total_product_qty`, `shake_name`) 
+	for ($i=0; $i < count($product_id); $i++) {
+
+		$insert = 'INSERT INTO `production` (`costing_id`, `product_id`, `product_name`, `user_qty`, `total_product_qty`) 
 		VALUES (
-			"'.$data['time'].'",
-			"'.$data['product_id'][$i].'",
-			"'.$data['user_qty'][$i].'", 
-			"'.$data['required_qty'].'",
-			"'.$data['total_per_kg'].'",
-			"'.$data['total'].'",
-			"'.$data['total_product_qty'][$i].'",
-			"'.$data['shake_name'].'"
+			"'.$last_id.'",
+			"'.$product_id[$i].'", 
+			"'.$product_name[$i].'", 
+			"'.$user_qty[$i].'", 
+			"'.$total_product_qty[$i].'"
 		)';
 
 		$result = mysqli_query($conn, $insert);
@@ -52,7 +54,7 @@ if (isset($_POST['save-stock'])) {
 		$remaining_stock = $f['total_qty'] - $total_product_qty[$key];
 
 		$update = "UPDATE `inventory` SET `total_qty` = '".$remaining_stock."' WHERE `id` = '".$value."'";
-		mysqli_query($conn,$update);
+		mysqli_query($conn, $update);
 
 	}
 

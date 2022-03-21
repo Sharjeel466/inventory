@@ -24,7 +24,7 @@ $row = $row[0];
 			<div class="form-group col-md-3">
 				<label>Total Quantity (kg)</label>
 				<input type="hidden" name="previous_stock" value="<?= $row['product_qty'] ?>">
-				<input type="text" onkeypress="return IsNumeric(event);" value="<?= $row['product_qty'] ?>" id="product_qty" class="form-control" name="qty" placeholder="Product Quantity">
+				<input type="text" onkeypress="return IsNumeric(event);" value="<?= $row['product_qty'] ?>" class="add_product_qty form-control" name="qty" placeholder="Product Quantity">
 			</div>
 			<div class="form-group col-md-3">
 				<label>Shortage (%)</label>

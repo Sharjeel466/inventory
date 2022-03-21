@@ -56,7 +56,6 @@ function create($table, $data){
 
 function select($t,$wh=[]){
 	global $conn;
-
 	$q1 = where($wh);
 	$select="SELECT * FROM $t $q1";
 	
@@ -116,7 +115,7 @@ function leftJoin($main_table, $left_table, $main_table_index, $left_table_index
 
 	$select = 'SELECT * FROM `'.$main_table.'` LEFT JOIN `'.$left_table.'` ON `'.$main_table.'`.`'.$main_table_index.'` = `'.$left_table.'`.`'.$left_table_index.'` ORDER BY `'.$order_by_table.'`.`'.$order_by_column.'` DESC';
 	$result = mysqli_query($conn, $select);
-
+	
 	$data=[];
 	while ($row = mysqli_fetch_assoc($result)) {
 		$data[] = $row;

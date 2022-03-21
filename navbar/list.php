@@ -2,6 +2,8 @@
 require_once('../include/header.php');
 
 $data = select('inventory');
+$production = select('production');
+
 ?>
 
 <div class="page-wrapper">
@@ -124,6 +126,39 @@ $data = select('inventory');
 					</div>
 				</div>
 			<?php endforeach ?>
+
+			<!-- Modal -->
+			<div class="modal fade" id="costing-data" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="shake"></h5>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body" id="modal-body">
+							<div class="row">
+								<div class="col-md-4">
+									<strong>Product Name</strong>
+									<div id="product_name"></div>
+								</div>
+								<div class="col-md-4">
+									<strong>User QTY</strong>
+									<div id="user_qty"></div>
+								</div>
+								<div class="col-md-4">
+									<strong>Product QTY</strong>
+									<div id="product_qty"></div>
+								</div>
+							</div> 
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+						</div>
+					</div>
+				</div>
+			</div>
 
 			<div class="main-content">
 				<div class="section__content section__content--p30">
