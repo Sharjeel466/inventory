@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 06, 2022 at 09:47 PM
+-- Generation Time: Mar 21, 2022 at 08:38 AM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 7.4.13
 
@@ -28,14 +28,12 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `costing` (
-  `id` int(11) NOT NULL,
+  `id` bigint(11) NOT NULL,
   `time` varchar(255) NOT NULL,
-  `product_id` varchar(255) NOT NULL,
-  `user_qty` varchar(255) NOT NULL,
-  `required_qty` int(11) NOT NULL,
+  `required_qty` float NOT NULL,
   `total_per_kg` float NOT NULL,
   `total` float NOT NULL,
-  `total_product_qty` float NOT NULL
+  `shake_name` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -47,14 +45,14 @@ CREATE TABLE `costing` (
 CREATE TABLE `inventory` (
   `id` int(11) NOT NULL,
   `product_name` varchar(255) NOT NULL,
-  `product_qty` int(11) NOT NULL,
-  `total_qty` int(11) NOT NULL,
-  `shortage` int(11) NOT NULL,
-  `total_amount_paid` int(11) NOT NULL,
-  `amount_per_kg` float NOT NULL,
-  `quality` int(11) NOT NULL,
+  `product_qty` float NOT NULL,
+  `total_qty` varchar(255) NOT NULL,
+  `shortage` varchar(255) NOT NULL,
+  `total_amount_paid` varchar(255) NOT NULL,
+  `amount_per_kg` varchar(255) NOT NULL,
+  `quality` varchar(255) NOT NULL,
   `category` varchar(255) NOT NULL,
-  `cargo` float NOT NULL
+  `cargo` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -69,6 +67,21 @@ CREATE TABLE `logs` (
   `action` varchar(255) NOT NULL,
   `description` varchar(255) NOT NULL,
   `time` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `production`
+--
+
+CREATE TABLE `production` (
+  `id` int(11) NOT NULL,
+  `costing_id` bigint(20) NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `product_name` varchar(255) NOT NULL,
+  `user_qty` float NOT NULL,
+  `total_product_qty` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -92,7 +105,10 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `mobile_number`, `address`, `role`) VALUES
-(1, 'admin', 'admin@gmail.com', '21232f297a57a5a743894a0e4a801fc3', '0123456789', 'abc, xyz', 'admin');
+(1, 'admin', 'admin@gmail.com', '21232f297a57a5a743894a0e4a801fc3', '3232323', '1331', 'admin'),
+(3, 'sub_admin', 'sub_admin@gmail.com', '691b54c8b795d95c2922d4eebfb03186', '96986897', '87675875', 'sub_admin'),
+(4, 'user', 'user@gmail.com', 'ee11cbb19052e40b07aac0ca060c23ee', '6785875', '865685', 'employee'),
+(5, 'employee', 'employee@gmail.com', 'fa5473530e4d1a5a1e1eb53d2fedb10c', '45687', '68797', 'employee');
 
 --
 -- Indexes for dumped tables
@@ -117,6 +133,13 @@ ALTER TABLE `logs`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `production`
+--
+ALTER TABLE `production`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `costing_id` (`costing_id`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -130,7 +153,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `costing`
 --
 ALTER TABLE `costing`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `inventory`
@@ -145,10 +168,26 @@ ALTER TABLE `logs`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `production`
+--
+ALTER TABLE `production`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `production`
+--
+ALTER TABLE `production`
+  ADD CONSTRAINT `production_ibfk_1` FOREIGN KEY (`costing_id`) REFERENCES `costing` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
