@@ -8,7 +8,7 @@ require_once('../navbar/list.php');
 	<h2>Production</h2>
 </div>
 <div class="card-body">
-	<form action="../production/save-production" method="post">
+	<form id="production-form" action="../production/save-production" method="post">
 		<div class="row">
 			<div class="form-group col-md-4">
 				<label><strong>Write Product Name</strong></label>
@@ -51,7 +51,7 @@ require_once('../navbar/list.php');
 				<strong>Required</strong>
 				<input type="text" onkeypress="return IsNumeric(event);" name="required_qty" placeholder="Required" id="required-qty" class="form-control" required autocomplete="off">
 			</div>
-			<?php if ($_SESSION['role'] == 'admin'): ?>
+			<?php if ($_SESSION['role'] == 'admin'){ ?>
 				<div class="col-md-4 mb-2">
 					<strong>Total/kg</strong>
 					<input type="text" class="form-control" placeholder="Total/kg" readonly name="total_per_kg" id="total">
@@ -61,17 +61,53 @@ require_once('../navbar/list.php');
 					<strong>Total</strong>
 					<input type="text" class="form-control" placeholder="Total" readonly name="total" id="all_total">
 				</div>
-			<?php endif ?>
+			<?php } else{?>
+				<div class="d-none">
+					<div class="col-md-4 mb-2">
+						<strong>Total/kg</strong>
+						<input type="text" class="form-control" placeholder="Total/kg" readonly name="total_per_kg" id="total">
+					</div>
+
+					<div class="col-md-4 mb-2">
+						<strong>Total</strong>
+						<input type="text" class="form-control" placeholder="Total" readonly name="total" id="all_total">
+					</div>
+				</div>
+			<?php } ?>
 
 		</div>
 		<hr>
 		<div class="form-group">
 			<button type="button" data-toggle="modal" data-target="#production_confirm" id="production" class="btn btn-secondary">Check</button>
-			<button type="submit" name="save-stock" class="btn btn-primary">Submit</button>
+			<button type="submit" name="save-stock" id="production_submit" class="btn btn-primary">Submit</button>
 		</div>
 	</form>
 </div>
 
+
+<!-- Button trigger modal -->
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				...
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+				<button type="button" class="btn btn-primary">Save changes</button>
+			</div>
+		</div>
+	</div>
+</div>
 
 <?php 
 require_once('../include/index-end.php');

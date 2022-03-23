@@ -1,4 +1,19 @@
 // ***********************************************
+
+$(document).ready(function() {
+  $('#production_submit').click(function(){
+    var confirm = window.confirm('form submit successfully !!!');
+    if (confirm) {
+    $('#production-form').submit();
+    }else{
+      event.preventDefault();
+    }
+  });
+});
+
+// ***********************************************
+
+// ***********************************************
 function costing($id, $shake){
 
   var id = $id;

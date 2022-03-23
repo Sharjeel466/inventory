@@ -4,7 +4,7 @@ require_once('../config/conn.php');
 require_once('../helper/functions.php');
 
 if (isset($_POST['save-stock'])) {
-	
+
 	$product_id = $_POST['product_id'];
 	$product_name = $_POST['product_name'];
 	$user_qty = $_POST['user_qty'];

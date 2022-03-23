@@ -17,6 +17,7 @@
 				<div class="col">Required Quantity</div>
 				<div class="col">Total/kg</div>
 				<div class="col">Total</div>
+				<div class="col">Time</div>
 				<div class="col">Action</div>
 			</li>
 			<?php $n =1;
@@ -36,6 +37,7 @@
 					<div class="col" data-label="Category-"><?= $f['required_qty'] ?></div>
 					<div class="col" data-label="Category-"><?= $f['total_per_kg'] ?></div>
 					<div class="col" data-label="Total Qty-"><?= $f['total'] ?></div>
+					<div class="col" data-label="Total Qty-"><?= $f['time'] ?></div>
 					<div class="col btn btn-success" data-label="Total Qty-" onclick="costing(<?= $f['id'] ?>, '<?= $f['shake_name'] ?>')">Details</div>
 				</li> 
 				<?php 
