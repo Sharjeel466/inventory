@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 21, 2022 at 08:38 AM
+-- Generation Time: Apr 05, 2022 at 02:24 AM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 7.4.13
 
@@ -52,7 +52,8 @@ CREATE TABLE `inventory` (
   `amount_per_kg` varchar(255) NOT NULL,
   `quality` varchar(255) NOT NULL,
   `category` varchar(255) NOT NULL,
-  `cargo` varchar(255) NOT NULL
+  `cargo` varchar(255) NOT NULL,
+  `amount_in_words` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -105,10 +106,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `mobile_number`, `address`, `role`) VALUES
-(1, 'admin', 'admin@gmail.com', '21232f297a57a5a743894a0e4a801fc3', '3232323', '1331', 'admin'),
-(3, 'sub_admin', 'sub_admin@gmail.com', '691b54c8b795d95c2922d4eebfb03186', '96986897', '87675875', 'sub_admin'),
-(4, 'user', 'user@gmail.com', 'ee11cbb19052e40b07aac0ca060c23ee', '6785875', '865685', 'employee'),
-(5, 'employee', 'employee@gmail.com', 'fa5473530e4d1a5a1e1eb53d2fedb10c', '45687', '68797', 'employee');
+(1, 'admin', 'admin@gmail.com', '21232f297a57a5a743894a0e4a801fc3', '123456789', 'abc, xyz', 'admin');
 
 --
 -- Indexes for dumped tables
@@ -177,7 +175,7 @@ ALTER TABLE `production`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Constraints for dumped tables

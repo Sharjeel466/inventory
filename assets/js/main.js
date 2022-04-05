@@ -1,19 +1,74 @@
 // ***********************************************
 
 $(document).ready(function() {
+  $('#amount_paid').on('keyup', function() {
+    var value = $(this).val();
+
+    $.ajax({
+      url: 'digit_to_currency.php',
+      data: {number: value},
+      success: function(data){
+        $('.amount-in-words').val(data);
+      }
+    });
+    
+  });
+
+  $('#edit-amount-paid').on('keyup', function() {
+    var value = $(this).val();
+
+    $.ajax({
+      url: 'digit_to_currency.php',
+      data: {number: value},
+      success: function(data){
+        $('.amount-in-words').val(data);
+      }
+    });
+    
+  });
+});
+
+// ***********************************************
+
+// $(document).ready(function() {
+//   $('.add_product_qty').on('keyup', function(){
+
+//     var x=$(this).val();
+//     x = x.toString();
+//     var lastThree = x.substring(x.length-3);
+//     var otherNumbers = x.substring(0, x.length-3);
+//     if(otherNumbers != '')
+//       lastThree = ',' + lastThree;
+//     var res = otherNumbers.replace(/\B(?=(\d{2})+(?!\d))/g, ",") + lastThree;
+//     console.log(res)
+
+//     document.getElementsByClassName("add_product_qty").innerHTML = res
+//     // $('.add_product_qty').val(res);
+//   });
+// });
+
+// ***********************************************
+
+$(document).ready(function() {
   $('#production_submit').click(function(){
-    var confirm = window.confirm('form submit successfully !!!');
-    if (confirm) {
-    $('#production-form').submit();
-    }else{
-      event.preventDefault();
+    var mixture_name = $('#mixture-name').val();
+
+    if (mixture_name == '') {
+      alert('Mixture name is Required !!!')      
+    }
+    else{  
+      var confirm = window.confirm('Are you sure you want to Submit !!!');
+      if (confirm) {
+        $('#production-form').submit();
+      }else{
+        event.preventDefault();
+      }
     }
   });
 });
 
 // ***********************************************
 
-// ***********************************************
 function costing($id, $shake){
 
   var id = $id;
@@ -52,7 +107,6 @@ function costing($id, $shake){
 
     }
   });
-
 
 }
 
@@ -115,7 +169,25 @@ $('#production').click(function() {
 
 });
 
-// ***********************************************
+// ********************Edit Stock***************************
+
+$(document).on('change paste keyup', function() {
+  var product_qty = $('#edit-total-qty').val();
+  var shortage = $('#edit-shortage').val();
+  var amount_paid = $('#edit-amount-paid').val();
+  var total_qty = $('#edit-qty-after-shortage').val();
+  var cargo = $('#edit-cargo').val();
+  
+  var amount = (parseFloat(cargo) + parseFloat(amount_paid)) / parseFloat(total_qty);
+
+  var percentage = ((parseFloat(product_qty) * parseFloat(shortage)) / 100);
+  var val = product_qty - percentage;
+  $('#edit-qty-after-shortage').val(val.toFixed(2));
+  $('#edit-amount-per-kg').val(amount.toFixed(2));
+
+});
+
+// ********************Add new Stock***************************
 
 $(document).on('change paste keyup', function() {
   var product_qty = $('.add_product_qty').val();

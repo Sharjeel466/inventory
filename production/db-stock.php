@@ -6,12 +6,18 @@ require_once('../helper/functions.php');
 ajax_select('inventory');
 
 function ajax_select($t){
-
+	global $conn;
 	$mat_number = $_GET['mat_number'];
-	$result = select('inventory');
+	$select = 'SELECT * FROM `inventory` WHERE `shortage` != "" AND `shortage` != "total_amount_paid" AND `amount_per_kg` != "" AND `shortage` != "" AND `cargo` != "" ';
+	$result=mysqli_query($conn,$select);
+
+	$data=[];
+	while ($row=mysqli_fetch_assoc($result)) {
+		$data[]=$row;
+	}
 
 	$costing_data = [];
-	foreach ($result as $key => $row) {
+	foreach ($data as $key => $row) {
 		$costing_data[] = $row;
 	}
 

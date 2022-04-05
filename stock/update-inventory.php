@@ -16,7 +16,8 @@ if(isset($_POST['update-inventory'])){
 	`amount_per_kg` = '".$data['amount_per_kg']."',
 	`quality` = '".$data['quality']."',
 	`category` = '".$data['category']."',
-	`cargo` = '".$data['cargo']."'
+	`cargo` = '".$data['cargo']."',
+	`amount_in_words` = '".$data['amount_in_words']."'
 	WHERE `id` = '".$data['id']."' ";
 
 	mysqli_query($conn, $update);

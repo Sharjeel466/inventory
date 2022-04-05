@@ -11,6 +11,7 @@ if (isset($_POST['save-stock'])) {
 	$quality = $_POST['quality'];
 	$category = $_POST['category'];
 	$cargo = $_POST['cargo'];
+	$amount_in_words = $_POST['amount_in_words'];
 	
 	if ($_POST['total_qty'] == 'NaN') {
 		$total_qty = '';
@@ -28,7 +29,8 @@ if (isset($_POST['save-stock'])) {
 		'amount_per_kg' => $amount_per_kg,
 		'quality' => $quality,
 		'category' => $category,
-		'cargo' => $cargo
+		'cargo' => $cargo,
+		'amount_in_words' => $amount_in_words
 	];	
 
 	create('inventory', $data);
@@ -60,11 +62,11 @@ if (isset($_POST['save-stock'])) {
 		<div class="row">
 			<div class="form-group col-md-3">
 				<label>Name</label>
-				<input type="text" required class="form-control" name="name" placeholder="Product Name">
+				<input type="text" id="product-name" required class="form-control" name="name" placeholder="Product Name">
 			</div>
 			<div class="form-group col-md-3">
 				<label>Category</label>
-				<input type="text" required class="form-control" name="category" placeholder="Category">
+				<input type="text" id="category-check" required class="form-control" name="category" placeholder="Category">
 			</div>
 			<div class="form-group col-md-3">
 				<label>Total Quantity (kg)</label>
@@ -82,6 +84,7 @@ if (isset($_POST['save-stock'])) {
 				<label>Total Amount Paid</label>	
 				<input type="text" id="amount_paid" onkeypress="return IsNumeric(event);" class="form-control" name="total_amount" placeholder="Paid Amount">
 			</div>
+			
 			<div class="form-group col-md-3">
 				<label>Cargo</label>	
 				<input type="text" id="cargo" onkeypress="return IsNumeric(event);" id="cargo" class="form-control" name="cargo" placeholder="Cargo">
@@ -98,6 +101,10 @@ if (isset($_POST['save-stock'])) {
 						<option value="<?= $i ?>"><?= $i ?></option>
 					<?php } ?>
 				</select>
+			</div>
+			<div class="form-group col-md-6">
+				<label>Total Amount in Words</label>	
+				<input type="text" readonly class="amount-in-words form-control" name="amount_in_words" placeholder="Amount in Words">
 			</div>
 		</div>
 		<div class="form-group">

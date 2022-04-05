@@ -11,19 +11,26 @@ require_once('../navbar/list.php');
 	<form id="production-form" action="../production/save-production" method="post">
 		<div class="row">
 			<div class="form-group col-md-4">
-				<label><strong>Write Product Name</strong></label>
-				<input type="text" class="form-control" required name="shake_name" placeholder="Mixture Name">
+				<label><strong>Write Mixture Name</strong></label>
+				<input type="text" class="form-control" id="mixture-name" required name="shake_name" placeholder="Mixture Name">
 
 				<label class="mt-3"><strong>Select number of raw material</strong></label>
 				<?php
-				$result = select('inventory');
+				$select = 'SELECT * FROM `inventory` WHERE `shortage` != "" AND `shortage` != "total_amount_paid" AND `amount_per_kg` != "" AND `shortage` != "" AND `cargo` != "" ';
+				$result=mysqli_query($conn,$select);
+
+				$data=[];
+				while ($row=mysqli_fetch_assoc($result)) {
+					$data[]=$row;
+				}
+
 
 				$costing_data = [];
-				foreach ($result as $key => $row) {
+				foreach ($data as $key => $row) {
 					$costing_data[] = $row;
 				}
 
-				$costing_count = count($result);
+				$costing_count = count($data);
 				
 				?>
 				<select id="mat-number" class="form-control">

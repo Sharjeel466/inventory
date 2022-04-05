@@ -1,12 +1,12 @@
 <?php 
-require_once('../navbar/list.php');
+// require_once('../navbar/list.php');
 
-$where = ['id' => $_GET['id']];
-$row = select('inventory', $where);
-$row = $row[0];
+// $where = ['id' => $_GET['id']];
+// $row = select('inventory', $where);
+// $row = $row[0];
 
 ?>
-<div class="card-header">
+<!-- <div class="card-header">
 	<h2>Update Stock</h2>
 </div>
 <div class="card-body">
@@ -63,7 +63,7 @@ $row = $row[0];
 		</div>
 	</form>
 </div>
-
+ -->
 <?php 
-require_once('../include/index-end.php');
+// require_once('../include/index-end.php');
 ?>

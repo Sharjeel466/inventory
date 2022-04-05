@@ -23,27 +23,27 @@ $row = $row[0];
 			</div>
 			<div class="form-group col-md-3">
 				<label>Total Quantity (kg)</label>
-				<input type="text" onkeypress="return IsNumeric(event);" value="<?= $row['product_qty'] ?>" class="add_product_qty form-control" name="qty" placeholder="Product Quantity">
+				<input type="text" onkeypress="return IsNumeric(event);" value="<?= $row['product_qty'] ?>" id="edit-total-qty" class="form-control" name="qty" placeholder="Product Quantity">
 			</div>
 			<div class="form-group col-md-3">
 				<label>Shortage (%)</label>
-				<input type="text" class="form-control" id="shortage" name="shortage" value="<?= $row['shortage'] ?>" placeholder="Product Shortage">
+				<input type="text" class="form-control" id="edit-shortage" name="shortage" value="<?= $row['shortage'] ?>" placeholder="Product Shortage">
 			</div>
 			<div class="form-group col-md-3">
 				<label>Quantity after Shortage</label>
-				<input type="text" class="form-control" id="total_qty" readonly value="<?= $row['total_qty'] ?>" name="total_qty" placeholder="Total Quantity">
+				<input type="text" class="form-control" id="edit-qty-after-shortage" readonly value="<?= $row['total_qty'] ?>" name="total_qty" placeholder="Total Quantity">
 			</div>
 			<div class="form-group col-md-3">
 				<label>Total Amount Paid</label>	
-				<input type="text" id="amount_paid" onkeypress="return IsNumeric(event);" value="<?= $row['total_amount_paid'] ?>" class="form-control" name="total_amount" placeholder="Paid Amount">
+				<input type="text" id="edit-amount-paid" onkeypress="return IsNumeric(event);" value="<?= $row['total_amount_paid'] ?>" class="form-control" name="total_amount" placeholder="Paid Amount" autocomplete="off">
 			</div>
 			<div class="form-group col-md-3">
 				<label>Cargo</label>	
-				<input type="text" id="cargo" onkeypress="return IsNumeric(event);" id="cargo" value="<?= $row['cargo'] ?>" class="form-control" name="cargo" placeholder="Cargo">
+				<input type="text" id="edit-cargo" onkeypress="return IsNumeric(event);" id="cargo" value="<?= $row['cargo'] ?>" class="form-control" name="cargo" placeholder="Cargo">
 			</div>
 			<div class="form-group col-md-3">
 				<label>Amount/kg</label>	
-				<input type="text" onkeypress="return IsNumeric(event);" value="<?= $row['amount_per_kg'] ?>" class="form-control" readonly name="amount_per_kg" id="amount_per_kg" placeholder="Amount/kg">
+				<input type="text" onkeypress="return IsNumeric(event);" value="<?= $row['amount_per_kg'] ?>" class="form-control" readonly name="amount_per_kg" id="edit-amount-per-kg" placeholder="Amount/kg">
 			</div>
 			<div class="form-group col-md-3">
 				<label>Quality</label>
@@ -53,6 +53,10 @@ $row = $row[0];
 						value="<?= $i ?>"><?= $i ?></option>
 					<?php } ?>
 				</select>
+			</div>
+			<div class="form-group col-md-6">
+				<label>Total Amount in Words</label>	
+				<input type="text" readonly class="amount-in-words form-control" value="<?= $row['amount_in_words'] ?>" name="amount_in_words" placeholder="Amount in Words">
 			</div>
 		</div>
 		<div class="form-group">

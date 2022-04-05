@@ -9,8 +9,8 @@ if (isset($_SESSION['user_name'])) {
 }
 
 if (isset($_POST['login'])) {
-	$email = $_POST['email'];
-	$password = $_POST['password'];
+	$email = validate($_POST['email']);
+	$password = validate($_POST['password']);
 
 	login('users', $email, $password);
 
