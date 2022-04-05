@@ -61,7 +61,6 @@ $data = select('inventory');
 				<div class="col">Cargo</div>
 				<div class="col">Amount/kg</div>
 				<div class="col">Quality</div>
-				<div class="col">Amount in Words</div>
 				<div class="col" colspan="2">Action</div>
 			</li>
 			<?php $n =1;?>
@@ -83,8 +82,6 @@ $data = select('inventory');
 					<div class="col <?php if ($value['amount_per_kg'] == ''): ?> bg-danger <?php endif ?>" data-label="Amount/kg-"><?= $value['amount_per_kg'] ?></div>
 					
 					<div class="col" data-label="Quality-"><?= $value['quality'] ?></div>
-
-					<div class="col <?php if ($value['amount_per_kg'] == ''): ?> bg-danger <?php endif ?>" data-label="Amount/kg-"><?= $value['amount_in_words'] ?></div>
 					
 					<div class="btn-group" role="group">
 						<a href="../stock/edit-inventory.php?id=<?php echo $value['id']?>" class="btn btn-sm btn-primary">Edit</a>
