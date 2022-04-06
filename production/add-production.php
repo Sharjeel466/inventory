@@ -66,7 +66,7 @@ require_once('../navbar/list.php');
 
 				<div class="col-md-4 mb-2">
 					<strong>Total</strong>
-					<input type="text" class="form-control" placeholder="Total" readonly name="total" id="all_total">
+					<input type="text" class="form-control production_all_total" placeholder="Total" readonly name="total" id="all_total">
 				</div>
 			<?php } else{?>
 				<div class="d-none">
@@ -77,10 +77,14 @@ require_once('../navbar/list.php');
 
 					<div class="col-md-4 mb-2">
 						<strong>Total</strong>
-						<input type="text" class="form-control" placeholder="Total" readonly name="total" id="all_total">
+						<input type="text" placeholder="Total" readonly name="total" id="all_total" class="form-control production_all_total">
 					</div>
 				</div>
 			<?php } ?>
+			<div class="col-md-12 mb-2">
+				<strong>Amount in words</strong>
+				<input type="text" class="form-control amount-in-words" placeholder="Amount in words" readonly>
+			</div>
 
 		</div>
 		<hr>

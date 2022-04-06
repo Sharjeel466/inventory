@@ -1,6 +1,7 @@
 // ***********************************************
 
 $(document).ready(function() {
+
   $('#amount_paid').on('keyup', function() {
     var value = $(this).val();
 
@@ -24,28 +25,28 @@ $(document).ready(function() {
         $('.amount-in-words').val(data);
       }
     });
-    
   });
+
 });
 
 // ***********************************************
 
-// $(document).ready(function() {
-//   $('.add_product_qty').on('keyup', function(){
+$(document).ready(function() {
+  $('.add_product_qty').on('keyup', function(){
 
-//     var x=$(this).val();
-//     x = x.toString();
-//     var lastThree = x.substring(x.length-3);
-//     var otherNumbers = x.substring(0, x.length-3);
-//     if(otherNumbers != '')
-//       lastThree = ',' + lastThree;
-//     var res = otherNumbers.replace(/\B(?=(\d{2})+(?!\d))/g, ",") + lastThree;
-//     console.log(res)
+    var x=$(this).val();
+    x = x.toString();
+    var lastThree = x.substring(x.length-3);
+    var otherNumbers = x.substring(0, x.length-3);
+    if(otherNumbers != '')
+      lastThree = ',' + lastThree;
+    var res = otherNumbers.replace(/\B(?=(\d{2})+(?!\d))/g, ",") + lastThree;
+    console.log(res)
 
-//     document.getElementsByClassName("add_product_qty").innerHTML = res
-//     // $('.add_product_qty').val(res);
-//   });
-// });
+    // document.getElementsByClassName("add_product_qty").innerHTML = res
+    $('.add_product_qty').val(res);
+  });
+});
 
 // ***********************************************
 
@@ -270,6 +271,17 @@ $(document).ready(function() {
               var total_per_kg = $('#total').val();
               var all_total = required_qty * total_per_kg; 
               var total_quantity = $('#total-qty').val();
+              var production_all_total = $('.production_all_total').val();
+              console.log(production_all_total)
+
+              $.ajax({
+                url: '../stock/digit_to_currency.php',
+                data: {number: production_all_total},
+                success: function(data){
+                  $('.amount-in-words').val(data);
+                }
+              });
+
 
               var total_sub_data = [];
               var total_sub_data_i = 0;
@@ -343,7 +355,7 @@ $(document).ready(function() {
 
             });
           });
-        })   
+})   
 }
 });
 });
