@@ -12,7 +12,7 @@ $(document).ready(function() {
         $('.amount-in-words').val(data);
       }
     });
-    
+
   });
 
   $('#edit-amount-paid').on('keyup', function() {
@@ -32,19 +32,61 @@ $(document).ready(function() {
 // ***********************************************
 
 $(document).ready(function() {
-  $('.add_product_qty').on('keyup', function(){
 
-    var x=$(this).val();
-    x = x.toString();
-    var lastThree = x.substring(x.length-3);
-    var otherNumbers = x.substring(0, x.length-3);
-    if(otherNumbers != '')
-      lastThree = ',' + lastThree;
-    var res = otherNumbers.replace(/\B(?=(\d{2})+(?!\d))/g, ",") + lastThree;
-    console.log(res)
+  $('#edit-cargo').val(function(index, value) {
+    return value.replace(/\D/g, "").replace(/\B(?=(?:(\d\d)+(\d)(?!\d))+(?!\d))/g, ",");
+  });
 
-    // document.getElementsByClassName("add_product_qty").innerHTML = res
-    $('.add_product_qty').val(res);
+  $('#edit-total-qty').val(function(index, value) {
+    return value.replace(/\D/g, "").replace(/\B(?=(?:(\d\d)+(\d)(?!\d))+(?!\d))/g, ",");
+  });
+
+  $('#edit-amount-paid').val(function(index, value) {
+    return value.replace(/\D/g, "").replace(/\B(?=(?:(\d\d)+(\d)(?!\d))+(?!\d))/g, ",");
+  });
+});
+
+// ***********************************************
+
+$('#edit-cargo').on('keyup', function(){
+
+  $(this).val(function(index, value) {
+    return value.replace(/\D/g, "").replace(/\B(?=(?:(\d\d)+(\d)(?!\d))+(?!\d))/g, ",");
+  });
+});
+
+$('#edit-amount-paid').on('keyup', function(){
+
+  $(this).val(function(index, value) {
+    return value.replace(/\D/g, "").replace(/\B(?=(?:(\d\d)+(\d)(?!\d))+(?!\d))/g, ",");
+  });
+});
+
+$('#edit-total-qty').on('keyup', function(){
+
+  $(this).val(function(index, value) {
+    return value.replace(/\D/g, "").replace(/\B(?=(?:(\d\d)+(\d)(?!\d))+(?!\d))/g, ",");
+  });
+});
+
+$('#amount_paid').on('keyup', function(){
+
+  $(this).val(function(index, value) {
+    return value.replace(/\D/g, "").replace(/\B(?=(?:(\d\d)+(\d)(?!\d))+(?!\d))/g, ",");
+  });
+});
+
+$('.add_product_qty').on('keyup', function(){
+
+  $(this).val(function(index, value) {
+    return value.replace(/\D/g, "").replace(/\B(?=(?:(\d\d)+(\d)(?!\d))+(?!\d))/g, ",");
+  });
+
+  $('#cargo').on('keyup', function(){
+
+    $(this).val(function(index, value) {
+      return value.replace(/\D/g, "").replace(/\B(?=(?:(\d\d)+(\d)(?!\d))+(?!\d))/g, ",");
+    });
   });
 });
 
@@ -172,16 +214,25 @@ $('#production').click(function() {
 
 // ********************Edit Stock***************************
 
-$(document).on('change paste keyup', function() {
+$(document).on('change paste keyup', '#edit-total-qty, #edit-shortage, #edit-amount-paid, #edit-cargo', function() {
+
   var product_qty = $('#edit-total-qty').val();
+  product_qty = product_qty.replace(/,/gi, "");
+
   var shortage = $('#edit-shortage').val();
-  var amount_paid = $('#edit-amount-paid').val();
-  var total_qty = $('#edit-qty-after-shortage').val();
-  var cargo = $('#edit-cargo').val();
   
+  var amount_paid = $('#edit-amount-paid').val();
+  amount_paid = amount_paid.replace(/,/gi, "");
+
+  var cargo = $('#edit-cargo').val();
+  cargo = cargo.replace(/,/gi, "");
+  
+  var total_qty = $('#edit-qty-after-shortage').val();
+
   var amount = (parseFloat(cargo) + parseFloat(amount_paid)) / parseFloat(total_qty);
 
   var percentage = ((parseFloat(product_qty) * parseFloat(shortage)) / 100);
+
   var val = product_qty - percentage;
   $('#edit-qty-after-shortage').val(val.toFixed(2));
   $('#edit-amount-per-kg').val(amount.toFixed(2));
@@ -190,12 +241,21 @@ $(document).on('change paste keyup', function() {
 
 // ********************Add new Stock***************************
 
-$(document).on('change paste keyup', function() {
+$(document).on('change paste keyup', '.add_product_qty, #amount_paid, #cargo, #shortage', function() {
+
   var product_qty = $('.add_product_qty').val();
+  product_qty = product_qty.replace(/,/gi, "");
+
   var shortage = $('#shortage').val();
+
   var amount_paid = $('#amount_paid').val();
+  amount_paid = amount_paid.replace(/,/gi, "");
+
   var total_qty = $('#total_qty').val();
+
   var cargo = $('#cargo').val();
+  cargo = cargo.replace(/,/gi, "");
+
 
   var amount = (parseFloat(cargo) + parseFloat(amount_paid)) / parseFloat(total_qty);
 
@@ -233,7 +293,7 @@ $(document).ready(function() {
           $('.product_qty-'+data_id).attr('product_id', selected);
           $('.prod_id-'+data_id).text(qty);
           $('.product_qty-'+data_id).val(qty);
-          
+
 
           $('.inventory').each(function(index){
             if($(this).data('id') != data_id){
@@ -244,7 +304,7 @@ $(document).ready(function() {
           $(document).on('keyup', '.product_qty-'+data_id, function() {
             var prod_qty = $(this).val();
             var x = t_price * prod_qty;
-            
+
             $('#hidden-product_qty-'+data_id).val(x.toFixed(2));
 
             var t = 0;
@@ -259,12 +319,9 @@ $(document).ready(function() {
 
             $('#total-qty').val(q.toFixed(2));
             var quantity = $('#total-qty').val();
-            
-            $('#total').val((t.toFixed(2) / quantity).toFixed(2));
-            // var total_per_kg = $('#total').val();
-            // required_qty * total_per_kg; 
 
-            // var total_quantity = $('#total-qty').val();
+            $('#total').val((t.toFixed(2) / quantity).toFixed(2));
+
 
             $(document).on('keyup', '#required-qty', function() {
               var required_qty = $(this).val();
@@ -293,7 +350,6 @@ $(document).ready(function() {
               $.each(total_sub_data, function(index, val) {
                 total_sub_data_sum += val;
               });
-              // $('.product-required-'+data_id).val(x.toFixed(2));
 
               $('#all_total').val(total_sub_data_sum.toFixed(2));
 
@@ -301,9 +357,6 @@ $(document).ready(function() {
 
               var total_divide = required_qty/total_quantity;
               var require_divided = total_divide.toFixed(2);
-              // $('#lot').val(require_divided);
-              // var answer = require_divided * $('.product_qty-'+data_id).val();
-              // console.log($('.product_qty-'+data_id).val())
 
 
               var a = [];
@@ -340,22 +393,18 @@ $(document).ready(function() {
               for (var i = 0; i < val_from_user.length; i++) { 
                 if (parseFloat(val_from_user[i]) <= parseInt(stock_in_database[i])) {
                   $('.product_qty-'+data_id).css('borderColor', '#ced4da');
-                  // console.log(val_from_user[i]+' <= '+stock_in_database[i])
-                  
+
                   data_id++;
                 }
                 else if(parseFloat(val_from_user[i]) > parseInt(stock_in_database[i])){                 
                   $('.product_qty-'+data_id).css('borderColor', 'red');
-                  // console.log(val_from_user[i]+' > '+stock_in_database[i])
-                  
+
                   data_id++;
                 }
-
               }
-
             });
           });
-})   
+        });   
 }
 });
 });

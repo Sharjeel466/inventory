@@ -5,20 +5,20 @@ require_once('../helper/functions.php');
 require_once('../config/conn.php');
 
 if(isset($_POST['update-inventory'])){
-	$data = $_POST;
+	$_POST['qty'] = str_replace(',', '', $_POST['qty']);
 
 	$update = "UPDATE `inventory` SET 
-	`product_name` = '".$data['name']."',
-	`product_qty` = '".$data['qty']."',
-	`total_qty` = '".$data['total_qty']."',
-	`shortage` = '".$data['shortage']."',
-	`total_amount_paid` = '".$data['total_amount']."',
-	`amount_per_kg` = '".$data['amount_per_kg']."',
-	`quality` = '".$data['quality']."',
-	`category` = '".$data['category']."',
-	`cargo` = '".$data['cargo']."',
-	`amount_in_words` = '".$data['amount_in_words']."'
-	WHERE `id` = '".$data['id']."' ";
+	`product_name` = '".$_POST['name']."',
+	`product_qty` = '".$_POST['qty']."',
+	`total_qty` = '".$_POST['total_qty']."',
+	`shortage` = '".$_POST['shortage']."',
+	`total_amount_paid` = '".$_POST['total_amount']."',
+	`amount_per_kg` = '".$_POST['amount_per_kg']."',
+	`quality` = '".$_POST['quality']."',
+	`category` = '".$_POST['category']."',
+	`cargo` = '".$_POST['cargo']."',
+	`amount_in_words` = '".$_POST['amount_in_words']."'
+	WHERE `id` = '".$_POST['id']."' ";
 
 	mysqli_query($conn, $update);
 

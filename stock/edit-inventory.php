@@ -27,7 +27,7 @@ $row = $row[0];
 			</div>
 			<div class="form-group col-md-3">
 				<label>Shortage (%)</label>
-				<input type="text" class="form-control" id="edit-shortage" name="shortage" value="<?= $row['shortage'] ?>" placeholder="Product Shortage">
+				<input type="text" class="form-control" maxlength="3" id="edit-shortage" name="shortage" value="<?= $row['shortage'] ?>" placeholder="Product Shortage">
 			</div>
 			<div class="form-group col-md-3">
 				<label>Quantity after Shortage</label>
@@ -35,11 +35,11 @@ $row = $row[0];
 			</div>
 			<div class="form-group col-md-3">
 				<label>Total Amount Paid</label>	
-				<input type="text" id="edit-amount-paid" onkeypress="return IsNumeric(event);" value="<?= $row['total_amount_paid'] ?>" class="form-control" name="total_amount" placeholder="Paid Amount" autocomplete="off">
+				<input type="text" id="edit-amount-paid" maxlength="11" onkeypress="return IsNumeric(event);" value="<?= $row['total_amount_paid'] ?>" class="form-control" name="total_amount" placeholder="Paid Amount" autocomplete="off">
 			</div>
 			<div class="form-group col-md-3">
 				<label>Cargo</label>	
-				<input type="text" id="edit-cargo" onkeypress="return IsNumeric(event);" id="cargo" value="<?= $row['cargo'] ?>" class="form-control" name="cargo" placeholder="Cargo">
+				<input type="text" id="edit-cargo" maxlength="11" onkeypress="return IsNumeric(event);" id="cargo" value="<?= $row['cargo'] ?>" class="form-control" name="cargo" placeholder="Cargo">
 			</div>
 			<div class="form-group col-md-3">
 				<label>Amount/kg</label>	

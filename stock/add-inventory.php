@@ -1,16 +1,21 @@
 <?php 
 require_once('../navbar/list.php');
 if (isset($_POST['save-stock'])) {
-
+// dd($_POST);die();
 	$name = $_POST['name'];
-	$qty = $_POST['qty'];
+	$qty = str_replace(',', '', $_POST['qty']);
+	
 	$total_qty = $_POST['total_qty'];
 	$shortage = $_POST['shortage'];
+	
 	$total_amount = $_POST['total_amount'];
+	
 	$amount_per_kg = $_POST['amount_per_kg'];
 	$quality = $_POST['quality'];
 	$category = $_POST['category'];
+	
 	$cargo = $_POST['cargo'];
+	
 	$amount_in_words = $_POST['amount_in_words'];
 	
 	if ($_POST['total_qty'] == 'NaN') {
@@ -70,11 +75,11 @@ if (isset($_POST['save-stock'])) {
 			</div>
 			<div class="form-group col-md-3">
 				<label>Total Quantity (kg)</label>
-				<input type="text" onkeypress="return IsNumeric(event);" required class="add_product_qty form-control" name="qty" placeholder="Product Quantity">
+				<input type="text" onkeypress="return IsNumeric(event);" required class="add_product_qty form-control" name="qty" placeholder="Product Quantity" autocomplete="off">
 			</div>
 			<div class="form-group col-md-3">
 				<label>Shortage (%)</label>
-				<input type="text" class="form-control" id="shortage" name="shortage" placeholder="Product Shortage">
+				<input type="text" class="form-control" maxlength="3" id="shortage" name="shortage" placeholder="Product Shortage" autocomplete="off">
 			</div>
 			<div class="form-group col-md-3">
 				<label>Quantity after Shortage</label>
@@ -82,12 +87,12 @@ if (isset($_POST['save-stock'])) {
 			</div>
 			<div class="form-group col-md-3">
 				<label>Total Amount Paid</label>	
-				<input type="text" id="amount_paid" onkeypress="return IsNumeric(event);" class="form-control" name="total_amount" placeholder="Paid Amount">
+				<input type="text" id="amount_paid" maxlength="11" onkeypress="return IsNumeric(event);" autocomplete="off" class="form-control number" name="total_amount" placeholder="Paid Amount">
 			</div>
 			
 			<div class="form-group col-md-3">
 				<label>Cargo</label>	
-				<input type="text" id="cargo" onkeypress="return IsNumeric(event);" id="cargo" class="form-control" name="cargo" placeholder="Cargo">
+				<input type="text" id="cargo" maxlength="11" onkeypress="return IsNumeric(event);" id="cargo" class="form-control" name="cargo" placeholder="Cargo" autocomplete="off">
 			</div>
 			<div class="form-group col-md-3">
 				<label>Amount/kg</label>	
